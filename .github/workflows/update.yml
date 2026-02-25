@@ -1,9 +1,10 @@
-name: Update Calendar Feed
+name: Update Calendar
 
 on:
   schedule:
-    - cron: '0 8 * * 1' # Jeden Montag um 08:00
-  workflow_dispatch: # Erlaubt manuelles Starten
+    # Dieser Zeitplan läuft jeden Tag um 04:00 Uhr morgens (UTC)
+    - cron: '0 4 * * *'
+  workflow_dispatch: # Erlaubt es dir, den Bot trotzdem manuell zu starten
 
 jobs:
   build:
