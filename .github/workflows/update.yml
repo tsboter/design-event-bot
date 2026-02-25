@@ -21,6 +21,7 @@ jobs:
       - name: Run Script
         env:
           SERPER_API_KEY: ${{ secrets.SERPER_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python update_cal.py
         
       - name: Commit and Push
