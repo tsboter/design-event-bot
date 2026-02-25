@@ -4,13 +4,18 @@ import hashlib
 import requests
 import time
 from bs4 import BeautifulSoup
-import google.generativeai as genai
+from google import genai # NEUES PAKET
 
 # --- KONFIGURATION ---
 SERPER_KEY = os.getenv("SERPER_API_KEY")
 GEMINI_KEY = os.getenv("GEMINI_API_KEY")
 DATABASE_FILE = "data.json"
 ICS_FILE = "events.ics"
+
+# Initialisierung des neuen Clients
+client = None
+if GEMINI_KEY:
+    client = genai.Client(api_key=GEMINI_KEY)
 
 def save_db(db):
     with open(DATABASE_FILE, "w", encoding="utf-8") as f:
@@ -21,20 +26,16 @@ def generate_id(text):
 
 def get_page_content(url):
     try:
-        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
         response = requests.get(url, headers=headers, timeout=15)
         soup = BeautifulSoup(response.text, 'html.parser')
         for s in soup(["script", "style", "nav", "footer"]): s.extract()
         return soup.get_text()[:6000]
-    except Exception as e:
-        print(f"  ! Fehler beim Laden der Seite: {e}")
+    except:
         return ""
 
 def extract_details_with_ai(page_text, source_url):
-    if not GEMINI_KEY: return None
-    
-    # Wir probieren verschiedene Modell-Varianten, um den 404 zu umgehen
-    model_names = ['gemini-1.5-flash', 'gemini-1.5-flash-latest']
+    if not client: return None
     
     prompt = f"""
     Extrahiere Event-Details für 2026. Quelle: {source_url}
@@ -52,32 +53,29 @@ def extract_details_with_ai(page_text, source_url):
     Text: {page_text}
     """
 
-    for m_name in model_names:
-        try:
-            genai.configure(api_key=GEMINI_KEY)
-            model = genai.GenerativeModel(m_name)
-            time.sleep(1) # Rate-Limit Schutz
-            response = model.generate_content(prompt)
-            content = response.text.replace("```json", "").replace("```", "").strip()
-            return json.loads(content)
-        except Exception as e:
-            print(f"  ! KI-Versuch mit {m_name} fehlgeschlagen: {e}")
-            continue
-    return None
+    try:
+        # Nutzung des neuen SDKs (models.generate_content)
+        response = client.models.generate_content(
+            model="gemini-1.5-flash",
+            contents=prompt
+        )
+        
+        # Das neue SDK gibt Text direkt zurück
+        raw_text = response.text
+        clean_json = raw_text.replace("```json", "").replace("```", "").strip()
+        return json.loads(clean_json)
+    except Exception as e:
+        print(f"  ! KI-Fehler mit neuem SDK: {e}")
+        return None
 
 def main():
-    # Datenbank laden
     if os.path.exists(DATABASE_FILE):
         with open(DATABASE_FILE, "r", encoding="utf-8") as f:
             db = json.load(f)
     else:
         db = {"events": {}}
 
-    keywords = [
-        "Service Design Konferenz 2026 Europa", 
-        "UX Design Events 2026 Deutschland",
-        "Public Sector Innovation Events 2026"
-    ]
+    keywords = ["Service Design Konferenz 2026", "UX Design Events 2026", "Public Sector Innovation 2026"]
     
     for kw in keywords:
         print(f"\n>>> Suche: {kw}")
@@ -88,20 +86,22 @@ def main():
                                 headers={'X-API-KEY': SERPER_KEY, 'Content-Type': 'application/json'},
                                 data=json.dumps({"q": kw}))
             results = res.json().get('organic', [])
-        except:
-            continue
+        except: continue
 
         for res in results:
             link = res.get('link')
             link_id = generate_id(link)
 
             if link_id in db["events"]:
-                print(f"  . Bekannt: {link[:50]}...")
+                print(f"  . Bekannt: {link[:40]}...")
                 continue
 
             print(f"  * Analysiere: {link}")
             text = get_page_content(link)
             if not text or len(text) < 200: continue
+            
+            # Rate Limit Schutz für Free Tier
+            time.sleep(3)
             
             details = extract_details_with_ai(text, link)
             
@@ -110,13 +110,11 @@ def main():
                 details["status"] = "active"
                 db["events"][link_id] = details
                 print(f"    => GEFUNDEN: {details['summary']}")
-                # Sofort speichern, damit nichts verloren geht
                 save_db(db)
             else:
                 db["events"][link_id] = {"status": "ignored", "link": link}
                 save_db(db)
 
-    # Am Ende ICS aus allen aktiven Events bauen
     generate_ics(db["events"])
 
 def generate_ics(events_dict):
