@@ -1,81 +1,86 @@
 import json
 import hashlib
 import os
+import requests
+from datetime import datetime
 
+# Konfiguration
+SERPER_API_KEY = os.getenv("SERPER_API_KEY")
 DATABASE_FILE = "data.json"
 ICS_FILE = "events.ics"
+KEYWORDS = ["Service Design", "UX Design", "UX/UI Design", "Public Sector Design", "Öffentliches Gestalten"]
+LOCATIONS = ["Europe", "Germany", "Berlin"]
 
-def generate_id(summary, date):
-    # Erstellt eine eindeutige ID basierend auf Name und Startdatum
-    return hashlib.md5(f"{summary}{date}".encode()).hexdigest()
+def search_events(keyword, location):
+    if not SERPER_API_KEY:
+        print("Kein API Key gefunden!")
+        return []
+    
+    query = f"{keyword} events {location} 2026"
+    url = "https://google.serper.dev/search"
+    payload = json.dumps({"q": query})
+    headers = {'X-API-KEY': SERPER_API_KEY, 'Content-Type': 'application/json'}
+    
+    response = requests.post(url, headers=headers, data=payload)
+    results = response.json().get('organic', [])
+    
+    found = []
+    for res in results:
+        # Sehr simple Extraktion aus dem Google-Snippet
+        found.append({
+            "summary": res.get('title'),
+            "link": res.get('link'),
+            "snippet": res.get('snippet'),
+            "location": location
+        })
+    return found
 
-def load_data():
-    if os.path.exists(DATABASE_FILE):
-        with open(DATABASE_FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
-    return {"events": {}}
-
-def save_data(data):
-    with open(DATABASE_FILE, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
-
-def update_event_data(existing, new_data):
-    # Logik für Updates: Nur überschreiben, wenn neue Info "gehaltvoller" ist
-    updated = False
-    for key in ["location", "description"]:
-        new_val = new_data.get(key, "")
-        # Update wenn das alte Feld leer war oder Platzhalter enthielt (TBA / tbd)
-        if len(new_val) > len(existing.get(key, "")) or "tba" in existing.get(key, "").lower():
-            if new_val:
-                existing[key] = new_val
-                updated = True
-    return updated
+def generate_id(summary):
+    return hashlib.md5(summary.encode()).hexdigest()
 
 def main():
-    db = load_data()
-    
-    # SIMULATION: Hier würde dein Scraper-Ergebnis stehen
-    # Ich nehme hier beispielhaft ein Event mit wenig Info
-    scraped_events = [
-        {
-            "summary": "Creative Bureaucracy Festival 2026",
-            "start": "20260611",
-            "end": "20260612",
-            "location": "Radialsystem, Berlin",
-            "description": "Details folgen bald."
-        }
-    ]
+    if os.path.exists(DATABASE_FILE):
+        with open(DATABASE_FILE, "r", encoding="utf-8") as f:
+            db = json.load(f)
+    else:
+        db = {"events": {}}
 
-    for event in scraped_events:
-        e_id = generate_id(event["summary"], event["start"])
-        
-        # 1. Dopplung & Gelöschte vermeiden
-        if e_id in db["events"]:
-            if db["events"][e_id].get("status") == "deleted":
-                continue # Ignorieren, da manuell gelöscht
+    for kw in KEYWORDS:
+        for loc in LOCATIONS:
+            print(f"Suche nach {kw} in {loc}...")
+            new_events = search_events(kw, loc)
             
-            # 2. Bestehende Events updaten (falls mehr Infos da sind)
-            update_event_data(db["events"][e_id], event)
-        else:
-            # 3. Neu aufnehmen
-            event["status"] = "active"
-            db["events"][e_id] = event
+            for event in new_events:
+                e_id = generate_id(event["summary"])
+                
+                if e_id not in db["events"]:
+                    # Neues Event anlegen
+                    db["events"][e_id] = {
+                        "summary": event["summary"],
+                        "start": "20260101", # Platzhalter, da Google Snippets oft kein ISO-Datum liefern
+                        "end": "20260102",
+                        "location": event["location"],
+                        "description": f"Gefunden via Suche. Link: {event['link']}\nInfo: {event['snippet']}",
+                        "status": "active",
+                        "needs_review": True # Markierung für dich zum Prüfen
+                    }
+                else:
+                    # Update Logik: Falls Link fehlte, jetzt aber da ist
+                    if "needs_review" in db["events"][e_id]:
+                        db["events"][e_id]["description"] += f"\nZusatz-Link: {event['link']}"
 
-    save_data(db)
+    with open(DATABASE_FILE, "w", encoding="utf-8") as f:
+        json.dump(db, f, indent=2, ensure_ascii=False)
+
     generate_ics(db["events"])
 
 def generate_ics(events_dict):
-    ics_content = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//EventBot//DE\nMETHOD:PUBLISH\n"
+    ics_content = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//DesignEventBot//DE\nMETHOD:PUBLISH\n"
     for e_id, e in events_dict.items():
         if e.get("status") == "active":
-            ics_content += "BEGIN:VEVENT\n"
-            ics_content += f"UID:{e_id}\n"
-            ics_content += f"SUMMARY:{e['summary']}\n"
-            ics_content += f"DTSTART;VALUE=DATE:{e['start']}\n"
-            ics_content += f"DTEND;VALUE=DATE:{e['end']}\n"
-            ics_content += f"LOCATION:{e['location']}\n"
-            ics_content += f"DESCRIPTION:{e['description']}\n"
-            ics_content += "END:VEVENT\n"
+            ics_content += f"BEGIN:VEVENT\nUID:{e_id}\nSUMMARY:{e['summary']}\n"
+            ics_content += f"DTSTART;VALUE=DATE:{e['start']}\nDTEND;VALUE=DATE:{e['end']}\n"
+            ics_content += f"LOCATION:{e['location']}\nDESCRIPTION:{e['description']}\nEND:VEVENT\n"
     ics_content += "END:VCALENDAR"
     
     with open(ICS_FILE, "w", encoding="utf-8") as f:
