@@ -22,40 +22,37 @@ def save_db(db):
 def get_page_content(url):
     try:
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
-        response = requests.get(url, headers=headers, timeout=10)
+        response = requests.get(url, headers=headers, timeout=8)
         soup = BeautifulSoup(response.text, 'html.parser')
         for s in soup(["script", "style", "nav", "footer"]): s.extract()
-        return soup.get_text()[:6000]
+        return soup.get_text()[:5000]
     except:
         return ""
 
 def extract_details_with_ai(page_text, source_url):
     if not client: return None
     
-    # Wir nehmen das "Lite" Modell, das im Free-Tier oft zuverlässiger ist
-    target_model = "gemini-2.0-flash-lite"
+    # Wir probieren erst Lite, dann Flash
+    models_to_try = ["gemini-2.0-flash-lite", "gemini-1.5-flash"]
     
-    prompt = f"Extrahiere Event-Details für 2026 als JSON (summary, start, end, location, type, priority, description). Quelle: {source_url}. Text: {page_text}"
+    prompt = f"Gib mir Event-Details für 2026 als JSON (summary, start, end, location, type, priority, description). Quelle: {source_url}. Text: {page_text}"
 
-    # Retry-Logik für Quota-Fehler
-    for attempt in range(3):
+    for model_name in models_to_try:
         try:
             response = client.models.generate_content(
-                model=target_model,
+                model=model_name,
                 contents=prompt,
                 config={'response_mime_type': 'application/json'}
             )
             return json.loads(response.text)
         except errors.ClientError as e:
             if "429" in str(e):
-                print(f"  ! Quota voll. Warte 60s (Versuch {attempt+1}/3)...")
-                time.sleep(60)
-            else:
-                print(f"  ! KI-Fehler: {e}")
-                break
+                print(f"  ! Quota-Limit erreicht bei {model_name}. Breche KI-Suche für heute ab.")
+                return "STOP" # Signal zum kompletten Abbruch
+            continue
         except Exception as e:
-            print(f"  ! Unerwarteter Fehler: {e}")
-            break
+            print(f"  ! Fehler bei {model_name}: {e}")
+            continue
     return None
 
 def main():
@@ -72,28 +69,31 @@ def main():
         try:
             search_res = requests.post("https://google.serper.dev/search", 
                                        headers={'X-API-KEY': SERPER_KEY},
-                                       json={"q": query, "num": 5}) # Begrenzung auf 5 Top-Links
+                                       json={"q": query, "num": 5})
             results = search_res.json().get('organic', [])
-        except:
-            continue
+        except: continue
         
         for res in results:
             link = res.get('link')
             link_id = hashlib.md5(link.encode()).hexdigest()
 
             if link_id in db["events"]:
-                print(f"  . Bekannt: {link[:40]}...")
                 continue
 
             print(f"  * Analysiere: {link}")
             content = get_page_content(link)
             if len(content) < 200: continue
             
-            # Warten zwischen den Anfragen, um das 15-RPM-Limit nicht zu reißen
-            time.sleep(10) 
+            # Kurze Pause für die Stabilität (nur 3 Sek)
+            time.sleep(3)
             
             details = extract_details_with_ai(content, link)
             
+            if details == "STOP":
+                print("\n[!] API Quota erschöpft. Ich speichere den aktuellen Stand und beende.")
+                generate_ics(db["events"])
+                return # Beendet das gesamte Programm vorzeitig
+
             if details and details.get("start"):
                 details["link"] = link
                 details["status"] = "active"
@@ -105,6 +105,7 @@ def main():
                 save_db(db)
 
     generate_ics(db["events"])
+    print("\n>>> Fertig! Kalender wurde aktualisiert.")
 
 def generate_ics(events_dict):
     ics_lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//EventBot//DE", "METHOD:PUBLISH"]
