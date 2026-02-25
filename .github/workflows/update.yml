@@ -29,10 +29,15 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python update_cal.py
         
-      - name: Commit and Push
+      - name: Commit and push changes
         run: |
           git config --global user.name "EventBot"
-          git config --global user.email "bot@github.com"
-          git add data.json events.ics
-          git commit -m "Update calendar feed" || exit 0
-          git push
+          git config --global user.email "bot@eventbot.com"
+          # Nur adden, wenn die Datei existiert
+          if [ -f data.json ]; then
+            git add data.json events.ics
+            # Nur committen, wenn es tatsächliche Änderungen gibt
+            git diff --quiet && git diff --staged --quiet || (git commit -m "Update calendar data" && git push)
+          else
+            echo "Keine Daten zum Committen gefunden."
+          fi
