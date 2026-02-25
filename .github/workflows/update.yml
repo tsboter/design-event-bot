@@ -1,0 +1,30 @@
+name: Update Calendar Feed
+
+on:
+  schedule:
+    - cron: '0 8 * * 1' # Jeden Montag um 08:00
+  workflow_dispatch: # Erlaubt manuelles Starten
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          
+      - name: Run Script
+        run: python update_cal.py
+        
+      - name: Commit and Push
+        run: |
+          git config --global user.name "EventBot"
+          git config --global user.email "bot@github.com"
+          git add events.ics
+          git commit -m "Update calendar feed" || exit 0
+          git push
