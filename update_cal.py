@@ -12,10 +12,16 @@ GEMINI_KEY = os.getenv("GEMINI_API_KEY")
 DATABASE_FILE = "data.json"
 ICS_FILE = "events.ics"
 
-# Gemini KI Setup
+# --- Gemini KI Setup ---
 if GEMINI_KEY:
-    genai.configure(api_key=GEMINI_KEY)
-    model = genai.GenerativeModel('gemini-1.5-flash')
+    try:
+        genai.configure(api_key=GEMINI_KEY)
+        # Wir nutzen 'gemini-1.5-flash' ohne Pfad-Präfix, 
+        # das SDK regelt die Version (v1 oder v1beta) automatisch.
+        model = genai.GenerativeModel('gemini-1.5-flash')
+        print("Gemini Modell erfolgreich initialisiert.")
+    except Exception as e:
+        print(f"Fehler bei der Modell-Initialisierung: {e}")
 
 def generate_id(text):
     """Erzeugt eine eindeutige ID (MD5 Hash)."""
