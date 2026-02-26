@@ -96,7 +96,7 @@ def main():
             content = get_page_content(link)
             if len(content) < 200: continue
             
-            time.sleep(2) # Kurze Pause zur Schonung der API
+            time.sleep(2) 
             details = extract_details_with_ai(content, link)
             
             if details == "STOP":
@@ -105,13 +105,20 @@ def main():
                 generate_ics(db["events"])
                 return
 
-            if details and details.get("start"):
+            # --- HIER IST DIE REPARATUR ---
+            # Falls die KI eine Liste geschickt hat, nehmen wir das erste Element
+            if isinstance(details, list) and len(details) > 0:
+                details = details[0]
+            
+            # Jetzt prüfen wir, ob wir wirklich ein gültiges Objekt mit Startdatum haben
+            if isinstance(details, dict) and details.get("start"):
                 details["link"] = link
                 details["status"] = "active"
                 db["events"][link_id] = details
                 print(f"    ✅ Gefunden: {details['summary']}")
                 save_db(db)
             else:
+                print(f"    ⚠️ Keine eindeutigen Event-Daten gefunden auf {link}")
                 db["events"][link_id] = {"status": "ignored"}
                 save_db(db)
 
