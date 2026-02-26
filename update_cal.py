@@ -7,10 +7,22 @@ from bs4 import BeautifulSoup
 from google import genai
 
 # --- ANPASSBARE KONFIGURATION ---
-# Hier kannst du Themen und Orte einfach erweitern oder ändern:
-THEMEN = ["Service Design", "UX Design", "Public Sector Innovation", "Design Thinking"]
-FORMATE = ["Konferenz","Conference", "Workshop", "Meet-up", "Talk", "Event"]
+THEMEN = ["Service Design", "UX Design", "Public Sector Innovation"]
+FORMATE = ["Konferenz", "Workshop", "Meet-up", "Talk"]
 ORTE = ["Berlin", "Deutschland", "Europa", "Online"]
+
+# SEED-LISTE: Diese URLs werden IMMER geprüft
+SEED_URLS = [
+    "https://www.service-design-network.org/events",
+    "https://interaction-design.org/events",
+    "https://uxpa.org/calendar/",
+    "https://www.ux-berlin.com/",
+    "https://www.servicedesignglobalconference.com/",
+    "https://uxconf.de/",
+    "https://www.interaction26.org/",
+    "https://digitale-leute.de/summit/",
+    "https://www.euroia.org/"
+]
 
 # API-Einstellungen
 SERPER_KEY = os.getenv("SERPER_API_KEY")
@@ -28,43 +40,56 @@ def load_db():
     return {"events": {}}
 
 def save_db(db):
-    # Bereinigung: Wir behalten nur aktive Events, um die Datei sauber zu halten
     with open(DATABASE_FILE, "w", encoding="utf-8") as f:
         json.dump(db, f, indent=2, ensure_ascii=False)
 
-def generate_search_queries():
-    """Erstellt Suchbegriffe basierend auf Themen, Formaten und Orten."""
-    queries = []
-    for thema in THEMEN:
-        for ort in ORTE:
-            # Beispiel: "Service Design Konferenz Berlin 2026"
-            queries.append(f"{thema} {' '.join(FORMATE[:2])} {ort} 2026")
-    return queries[:15] # Limit auf 15 Anfragen pro Run
+def process_url(link, db):
+    """Scraped eine URL und füttert die KI."""
+    link_id = hashlib.md5(link.encode()).hexdigest()
+    if link_id in db["events"]: 
+        return False # Schon bekannt
 
-def is_duplicate(new_event, db):
-    """Prüft auf inhaltliche Dubletten (gleicher Titel am gleichen Tag)."""
-    new_summary = new_event.get("summary", "").lower().strip()
-    new_start = new_event.get("start", "")
-    
-    for eid, e in db["events"].items():
-        if e.get("status") == "active":
-            old_summary = e.get("summary", "").lower().strip()
-            old_start = e.get("start", "")
-            # Wenn Titel fast gleich UND Datum gleich -> Dublette
-            if new_summary == old_summary and new_start == old_start:
-                return True
-    return False
+    print(f"  * Analysiere: {link}")
+    try:
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
+        page = requests.get(link, headers=headers, timeout=15).text
+        content = BeautifulSoup(page, 'html.parser').get_text()[:5000]
+        
+        time.sleep(2)
+        found_events = extract_details_with_ai(content, link)
+        
+        new_found = False
+        for event in found_events:
+            if not event or not event.get("start") or not event.get("summary"):
+                continue
+            
+            # Inhalts-Check (Titel + Datum)
+            is_dupe = False
+            for eid, e in db["events"].items():
+                if e.get("summary") == event["summary"] and e.get("start") == event["start"]:
+                    is_dupe = True
+                    break
+            
+            if not is_dupe:
+                event["link"] = link
+                event["status"] = "active"
+                db["events"][link_id + "_" + str(time.time())] = event
+                print(f"    ✅ NEU: {event['summary']}")
+                new_found = True
+        
+        if not found_events:
+            db["events"][link_id] = {"status": "ignored"}
+            
+        return new_found
+    except Exception as e:
+        print(f"    ❌ Fehler bei {link}: {e}")
+        return False
 
 def extract_details_with_ai(text, source_url):
-    """KI-Prompt mit Fokus auf deine Formate und Hierarchie."""
-    formate_str = ", ".join(FORMATE)
-    orte_str = ", ".join(ORTE)
-    
     prompt = (
-        f"Extrahiere ausschließlich folgende Formate: {formate_str}. "
-        f"Priorisiere Orte in dieser Hierarchie: {orte_str}. "
-        f"Erstelle ein JSON-Array mit Events für 2026. "
-        f"Felder: summary, start (YYYYMMDD), end (YYYYMMDD), location, type, description. "
+        f"Extrahiere Events für 2026 (Formate: {', '.join(FORMATE)}). "
+        f"Fokus auf Regionen: {', '.join(ORTE)}. "
+        f"Antworte NUR als JSON-Liste: [{{summary, start(YYYYMMDD), end, location, type, description}}]. "
         f"Quelle: {source_url}. Text: {text}"
     )
     try:
@@ -79,79 +104,48 @@ def extract_details_with_ai(text, source_url):
         return []
 
 def generate_ics(db):
-    """Erzeugt eine saubere, einzelne ICS Datei."""
-    ics = [
-        "BEGIN:VCALENDAR",
-        "VERSION:2.0",
-        "PRODID:-//DesignEventBot//DE",
-        "X-WR-CALNAME:Design Events 2026",
-        "X-WR-TIMEZONE:Europe/Berlin",
-        "METHOD:PUBLISH",
-        "CALSCALE:GREGORIAN"
-    ]
-    
+    ics = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//DesignBot//DE", "X-WR-CALNAME:Design Events 2026", "METHOD:PUBLISH"]
     for eid, e in db["events"].items():
-        if e.get("status") == "active" and e.get("start"):
+        if e.get("status") == "active":
             ics.extend([
                 "BEGIN:VEVENT",
                 f"UID:{eid}",
                 f"SUMMARY:{e['summary']}",
                 f"DTSTART;VALUE=DATE:{e['start']}",
                 f"DTEND;VALUE=DATE:{e.get('end', e['start'])}",
-                f"LOCATION:{e.get('location', 'Unbekannt')}",
-                f"DESCRIPTION:Typ: {e.get('type', 'Event')}\\nLink: {e.get('link', '')}",
+                f"LOCATION:{e.get('location','Berlin/Online')}",
+                f"DESCRIPTION:Link: {e.get('link','')}",
                 "END:VEVENT"
             ])
-    
     ics.append("END:VCALENDAR")
     with open(ICS_FILE, "w", encoding="utf-8") as f:
         f.write("\n".join(ics))
-    print(f">>> {ICS_FILE} wurde mit allen aktuellen Events überschrieben.")
 
 def main():
     db = load_db()
-    queries = generate_search_queries()
     
-    for query in queries:
-        print(f"\n>>> Suche: {query}")
-        try:
-            res = requests.post("https://google.serper.dev/search", 
-                                headers={'X-API-KEY': SERPER_KEY},
-                                json={"q": query, "num": 5}).json()
-        except: continue
-        
-        for item in res.get('organic', []):
-            link = item['link']
-            # Link-basiertes ID-System
-            link_id = hashlib.md5(link.encode()).hexdigest()
-            
-            if link_id in db["events"]: continue
-            
-            print(f"  * Check: {link}")
-            try:
-                page = requests.get(link, timeout=10).text
-                content = BeautifulSoup(page, 'html.parser').get_text()[:4000]
-            except: continue
-            
-            time.sleep(2)
-            found_events = extract_details_with_ai(content, link)
-            
-            for event in found_events:
-                if not event or not isinstance(event, dict) or not event.get("start"):
-                    continue
-                
-                # Dubletten-Check (inhaltlich)
-                if is_duplicate(event, db):
-                    print(f"    ⏩ Dublette ignoriert: {event['summary']}")
-                    continue
+    # 1. Zuerst die Seed-Liste abarbeiten
+    print(">>> Verarbeite Seed-Liste...")
+    for url in SEED_URLS:
+        process_url(url, db)
+        save_db(db)
 
-                event["link"] = link
-                event["status"] = "active"
-                db["events"][link_id] = event
-                print(f"    ✅ NEU: {event['summary']} am {event['start']}")
-                save_db(db)
+    # 2. Dann die Google-Suche
+    print("\n>>> Starte Google-Suche...")
+    for thema in THEMEN:
+        for ort in ORTE[:2]: # Nur Berlin & Deutschland für die Suche
+            query = f"{thema} Event {ort} 2026"
+            try:
+                res = requests.post("https://google.serper.dev/search", 
+                                    headers={'X-API-KEY': SERPER_KEY},
+                                    json={"q": query, "num": 5}).json()
+                for item in res.get('organic', []):
+                    process_url(item['link'], db)
+                    save_db(db)
+            except: continue
 
     generate_ics(db)
+    print("\n>>> Kalender aktualisiert!")
 
 if __name__ == "__main__":
     main()
