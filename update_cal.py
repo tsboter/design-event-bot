@@ -5,15 +5,12 @@ import requests
 import time
 from bs4 import BeautifulSoup
 from google import genai
-from google.genai import errors
 
 # --- KONFIGURATION ---
 SERPER_KEY = os.getenv("SERPER_API_KEY")
 GEMINI_KEY = os.getenv("GEMINI_API_KEY")
 DATABASE_FILE = "data.json"
 ICS_FILE = "events.ics"
-
-# Wir nutzen das Modell, das bei dir gerade erfolgreich war
 TARGET_MODEL = "models/gemini-2.5-flash"
 
 client = genai.Client(api_key=GEMINI_KEY) if GEMINI_KEY else None
@@ -28,20 +25,21 @@ def save_db(db):
     with open(DATABASE_FILE, "w", encoding="utf-8") as f:
         json.dump(db, f, indent=2, ensure_ascii=False)
 
-def get_page_content(url):
-    try:
-        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
-        response = requests.get(url, headers=headers, timeout=10)
-        soup = BeautifulSoup(response.text, 'html.parser')
-        for s in soup(["script", "style", "nav", "footer"]): s.extract()
-        return soup.get_text()[:5000] # Genug Kontext für die KI
-    except:
-        return ""
+def is_duplicate(new_summary, db):
+    """Prüft, ob ein Event mit ähnlichem Titel bereits existiert."""
+    new_title_clean = new_summary.lower().strip()
+    for eid, e in db["events"].items():
+        if e.get("status") == "active":
+            if new_title_clean == e.get("summary", "").lower().strip():
+                return True
+    return False
 
 def extract_details_with_ai(text, source_url):
+    # Schärfere Anweisungen an die KI
     prompt = (
-        f"Extrahiere Event-Details für das Jahr 2026 als JSON. "
-        f"Felder: summary, start (YYYYMMDD), end (YYYYMMDD), location, type, description. "
+        f"Extrahiere NUR professionelle Events für 2026 (Konferenzen, Workshops, Talks, Summits). "
+        f"Ignoriere allgemeine Werbung oder unklare Daten. "
+        f"Antworte als JSON-Liste von Objekten mit: summary, start (YYYYMMDD), end (YYYYMMDD), location, type, description. "
         f"Quelle: {source_url}. Text: {text}"
     )
     try:
@@ -50,33 +48,20 @@ def extract_details_with_ai(text, source_url):
             contents=prompt,
             config={'response_mime_type': 'application/json'}
         )
-        return json.loads(response.text)
-    except Exception as e:
-        if "429" in str(e): return "STOP"
-        print(f"  ! KI-Fehler: {e}")
-        return None
-
-def generate_ics(events_dict):
-    ics = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//EventBot//DE", "METHOD:PUBLISH"]
-    for eid, e in events_dict.items():
-        if e.get("status") == "active":
-            ics.extend([
-                "BEGIN:VEVENT",
-                f"UID:{eid}",
-                f"SUMMARY:[{e.get('type','EVENT').upper()}] {e['summary']}",
-                f"DTSTART;VALUE=DATE:{e['start']}",
-                f"DTEND;VALUE=DATE:{e['end']}",
-                f"LOCATION:{e['location']}",
-                f"DESCRIPTION:{e.get('description','')} Link: {e.get('link','')}",
-                "END:VEVENT"
-            ])
-    ics.append("END:VCALENDAR")
-    with open(ICS_FILE, "w", encoding="utf-8") as f:
-        f.write("\n".join(ics))
+        data = json.loads(response.text)
+        return data if isinstance(data, list) else [data]
+    except:
+        return []
 
 def main():
     db = load_db()
-    queries = ["Service Design Konferenz 2026", "UX Design Events 2026", "Innovation Public Sector 2026"]
+    # Spezifischere Suchanfragen
+    queries = [
+        "Service Design Konferenz 2026", 
+        "UX Design Workshops 2026", 
+        "Public Innovation Talks 2026",
+        "Design Thinking Events 2026 Europe"
+    ]
     
     for query in queries:
         print(f"\n>>> Suche: {query}")
@@ -92,38 +77,49 @@ def main():
             
             if link_id in db["events"]: continue
             
-            print(f"  * Scrape: {link}")
-            content = get_page_content(link)
-            if len(content) < 200: continue
+            print(f"  * Analysiere: {link}")
+            try:
+                page = requests.get(link, timeout=10).text
+                content = BeautifulSoup(page, 'html.parser').get_text()[:5000]
+            except: continue
             
-            time.sleep(2) 
-            details = extract_details_with_ai(content, link)
+            time.sleep(2)
+            found_events = extract_details_with_ai(content, link)
             
-            if details == "STOP":
-                print("!!! Quota erreicht. Speichere und beende.")
-                save_db(db)
-                generate_ics(db["events"])
-                return
+            for event in found_events:
+                if not event.get("start") or not event.get("summary"):
+                    continue
+                
+                # Check auf Dubletten (Titel-Vergleich)
+                if is_duplicate(event["summary"], db):
+                    print(f"    ⏩ Übersprungen (Dublette): {event['summary']}")
+                    continue
 
-            # --- HIER IST DIE REPARATUR ---
-            # Falls die KI eine Liste geschickt hat, nehmen wir das erste Element
-            if isinstance(details, list) and len(details) > 0:
-                details = details[0]
-            
-            # Jetzt prüfen wir, ob wir wirklich ein gültiges Objekt mit Startdatum haben
-            if isinstance(details, dict) and details.get("start"):
-                details["link"] = link
-                details["status"] = "active"
-                db["events"][link_id] = details
-                print(f"    ✅ Gefunden: {details['summary']}")
-                save_db(db)
-            else:
-                print(f"    ⚠️ Keine eindeutigen Event-Daten gefunden auf {link}")
-                db["events"][link_id] = {"status": "ignored"}
+                event["link"] = link
+                event["status"] = "active"
+                db["events"][link_id] = event
+                print(f"    ✅ NEU: {event['summary']} ({event['start']})")
                 save_db(db)
 
-    generate_ics(db["events"])
-    print("\n>>> Fertig! Kalender aktualisiert.")
+    generate_ics(db)
+
+def generate_ics(db):
+    ics = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//DesignBot//DE", "X-WR-CALNAME:Design Events 2026", "METHOD:PUBLISH"]
+    for eid, e in db["events"].items():
+        if e.get("status") == "active":
+            ics.extend([
+                "BEGIN:VEVENT",
+                f"UID:{eid}",
+                f"SUMMARY:{e['summary']}",
+                f"DTSTART;VALUE=DATE:{e['start']}",
+                f"DTEND;VALUE=DATE:{e.get('end', e['start'])}",
+                f"LOCATION:{e.get('location','Online')}",
+                f"DESCRIPTION:Typ: {e.get('type','Event')}\\nLink: {e.get('link','')}",
+                "END:VEVENT"
+            ])
+    ics.append("END:VCALENDAR")
+    with open(ICS_FILE, "w", encoding="utf-8") as f:
+        f.write("\n".join(ics))
 
 if __name__ == "__main__":
     main()
