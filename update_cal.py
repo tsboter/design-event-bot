@@ -9,7 +9,7 @@ from google import genai
 # --- ANPASSBARE KONFIGURATION ---
 # Hier kannst du Themen und Orte einfach erweitern oder ändern:
 THEMEN = ["Service Design", "UX Design", "Public Sector Innovation", "Design Thinking"]
-FORMATE = ["Konferenz", "Workshop", "Meet-up", "Talk", "Event"]
+FORMATE = ["Konferenz","Conference", "Workshop", "Meet-up", "Talk", "Event"]
 ORTE = ["Berlin", "Deutschland", "Europa", "Online"]
 
 # API-Einstellungen
