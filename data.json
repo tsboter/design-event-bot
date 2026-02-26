@@ -118,6 +118,56 @@
     },
     "bd244a774fd97bf9fe5c61e8bd2e516d": {
       "status": "ignored"
+    },
+    "d37c77bede552abef85ba2c771cd3139": {
+      "summary": "SDN Global Café - From evidence to action",
+      "start": "20260318",
+      "end": "20260318",
+      "location": "Zoom (Online)",
+      "type": "Talk",
+      "description": "From Evidence to Action: Join the SDN Global Café Exploring the UK’s First Public Design Evidence Review with Professor Lucy Kimbell and David Singer.",
+      "link": "https://www.service-design-network.org/",
+      "status": "active"
+    },
+    "2124416eb82b04c2bba637b9cc448bdd": {
+      "summary": "Inspire & Connect at UXCON26, where UX professionals, product managers, and engineers collaborate to design better experiences.",
+      "start": "20261008",
+      "end": "20261008",
+      "location": "CIVIC CENTER, Silver Spring",
+      "type": "Conference",
+      "description": "A day of bold ideas, real connection, and unforgettable experiences. UXCON26 brings together leaders in UX, product management, and engineering to explore true collaboration in shaping better experiences. It aims to reignite conversations about the essence of the UX craft and how professionals can thrive today.",
+      "link": "https://www.uxconference.org/",
+      "status": "active"
+    },
+    "6ddd07c1930cb2643e2382b12201da89": {
+      "summary": "UX360 Virtual Research Summit",
+      "start": "20260204",
+      "end": "20260205",
+      "location": "Online",
+      "type": "Summit",
+      "description": "A summit designed for sharpening UX research skills and getting inspired by real-world case studies.",
+      "link": "https://www.interaction-design.org/literature/article/ux-conferences-2024?ep=Uxness&srsltid=AfmBOoql6ivdk9zJkeKz38vBp0rnUSNIroQ1XKBcl8DZglvUoArMmJAt",
+      "status": "active"
+    },
+    "925bbef774410951ba34ce336be893de": {
+      "summary": "Government Innovation Georgia",
+      "start": "20260211",
+      "end": "20260211",
+      "location": "Atlanta Marriott NE Hotel, Atlanta, Georgia",
+      "type": "Conference",
+      "description": "Transforming Government through Accelerating Impact and Modernizing Technology. Technology has unlocked countless opportunities for growth, collaboration, and improvement among the State of Georgia’s agencies, departments & beyond. This one-day, in-person program will convene public sector leaders to discuss modernizing platforms, leveraging data and analytics, and the evolution of technology, data, digital transformation, AI, and the workforce, providing an ideal space for networking and sharing best practices.",
+      "link": "https://publicsectornetwork.com/events/government-innovation-showcase-georgia/",
+      "status": "active"
+    },
+    "83d53c131db5263a46fa3f66d76cbebb": {
+      "summary": "Design Thinking for Researchers",
+      "start": "20261007",
+      "end": "20261007",
+      "location": "Berlin",
+      "type": "Workshop",
+      "description": "A programme designed for researchers, hosted at the Young Entrepreneurs in Science learning space by the Falling Walls Foundation. The workshop runs from 9 am-6 pm. Spots are limited to approximately 25 participants and allocated on a first-come, first-served basis. Selected participants will receive a confirmation email with further details.",
+      "link": "https://falling-walls.com/design-thinking-researchers-071026",
+      "status": "active"
     }
   }
 }

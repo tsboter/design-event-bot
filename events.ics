@@ -1,93 +1,134 @@
 BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//EventBot//DE
+PRODID:-//DesignBot//DE
+X-WR-CALNAME:Design Events 2026
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:f257528534291f3a484759d114cc4d58
-SUMMARY:[CONFERENCE] Service Design Global Conference 2026 (SDGC26)
+SUMMARY:Service Design Global Conference 2026 (SDGC26)
 DTSTART;VALUE=DATE:20261028
 DTEND;VALUE=DATE:20261030
 LOCATION:RheinMain Congress Center, Wiesbaden, Frankfurt RheinMain region (onsite and online)
-DESCRIPTION:The Service Design Global Conference 2026 (SDGC26) takes place 28-30 October in the Frankfurt RheinMain region, both onsite and online. It aims to discover how service design drives innovation and transforms modern organizations. The theme 'Beyond Boundaries: Enabling Solutions That Shape Tomorrow' explores how organizations across public and private sectors and the communities they serve can move past today’s limits to shape more resilient, meaningful futures through service design. SDGC26 brings together pioneers and practitioners for breakthrough ideas, practical tools, and meaningful connections, engaging with leading voices and exploring cutting-edge approaches to propel organizations forward. Link: https://www.servicedesignglobalconference.com/
+DESCRIPTION:Typ: Conference\nLink: https://www.servicedesignglobalconference.com/
 END:VEVENT
 BEGIN:VEVENT
 UID:a145bf6f8fe0ddc5c8daaece479e6f79
-SUMMARY:[CONFERENCE] Service Design Global Conference 2026
+SUMMARY:Service Design Global Conference 2026
 DTSTART;VALUE=DATE:20261028
 DTEND;VALUE=DATE:20261030
 LOCATION:Wiesbaden, Germany (RheinMain CongressCenter)
-DESCRIPTION:The Service Design Global Conference 2026 (SDGC26) will take place from 28-30 October 2026, gathering the international Service Design community both in-person in Wiesbaden, in the vibrant Frankfurt RheinMain region, and online for virtual attendees. The conference is organized in cooperation with the World Design Capital 2026. The 3-day format includes workshops on 28 October (requiring separate purchase) followed by two full days of inspiring conference talks, keynotes, and panels on 29-30 October. In-person attendees will meet at the state-of-the-art RheinMain CongressCenter (RMCC). Link: https://www.service-design-network.org/events/sdgc-2026-germany
+DESCRIPTION:Typ: Conference\nLink: https://www.service-design-network.org/events/sdgc-2026-germany
 END:VEVENT
 BEGIN:VEVENT
 UID:6d1d884dc2cde9af420e29001b5507e9
-SUMMARY:[CONFERENCE] Service Design Global Conference 2026
+SUMMARY:Service Design Global Conference 2026
 DTSTART;VALUE=DATE:20261028
 DTEND;VALUE=DATE:20261030
 LOCATION:RheinMain Congress Center, Friedrich-Ebert-Allee 1, 65185 Wiesbaden, Germany
-DESCRIPTION:The Service Design Global Conference 2026 (SDGC26) is being held from October 28-30, 2026, at the RheinMain Congress Center in Wiesbaden, Germany. Early Bird tickets are available until June 30, 2026, offering savings for both in-person and virtual attendees. In-person tickets grant access to the conference on October 29-30, with an optional add-on for a closing event. Virtual tickets provide online access for the same dates, including a special rate for students. Workshops scheduled for October 28 are not included in these ticket types. Link: https://www.servicedesignglobalconference.com/event-details/service-design-global-conference-2026
+DESCRIPTION:Typ: Conference\nLink: https://www.servicedesignglobalconference.com/event-details/service-design-global-conference-2026
 END:VEVENT
 BEGIN:VEVENT
 UID:b07d5a049880291e09b7d639cd19fd89
-SUMMARY:[CONFERENCE] Service Design Global Conference 2026
+SUMMARY:Service Design Global Conference 2026
 DTSTART;VALUE=DATE:20261028
 DTEND;VALUE=DATE:20261030
 LOCATION:Wiesbaden, Frankfurt RheinMain, Germany
-DESCRIPTION:The Service Design Network has announced that registration for the Service Design Global Conference 2026 (SDGC26) is officially open. The event brings the international Service Design community to Germany, with in-person attendance in Wiesbaden, in the vibrant Frankfurt RheinMain region, and online for virtual attendees. It is organized in cooperation with the World Design Capital Frankfurt RheinMain 2026. Link: https://wdo.org/event/service-design-global-conference-2026/
+DESCRIPTION:Typ: Conference\nLink: https://wdo.org/event/service-design-global-conference-2026/
 END:VEVENT
 BEGIN:VEVENT
 UID:f5f0c8739b6f46c12b0b054c0709fc9c
-SUMMARY:[DISCUSSION] UX Discussion: How Junior Designers Can Stand Out
+SUMMARY:UX Discussion: How Junior Designers Can Stand Out
 DTSTART;VALUE=DATE:20260224
 DTEND;VALUE=DATE:20260224
 LOCATION:Atlanta, United States
-DESCRIPTION: Link: https://ixda.org/event/12960/
+DESCRIPTION:Typ: Discussion\nLink: https://ixda.org/event/12960/
 END:VEVENT
 BEGIN:VEVENT
 UID:bac8f4c690ad5025d5fc73d0c23cee4e
-SUMMARY:[RESEARCH, PRODUCT, DESIGN] prompt:UX
+SUMMARY:prompt:UX
 DTSTART;VALUE=DATE:20260121
 DTEND;VALUE=DATE:20260122
 LOCATION:Berlin, Germany
-DESCRIPTION:The prompt:UX Conference focuses on the intersection of artificial intelligence and user experience design, gathering designers, researchers, and product managers to explore how AI is reshaping UX and how to prepare strategies, tools, and workflows accordingly. Expect engaging keynotes from industry leaders, hands-on workshops, case studies, and a dedicated networking reception, all aimed at helping your team integrate AI into UX in meaningful, future-ready ways. If you’re looking to stay at the forefront of AI-powered UX design and research, this conference offers the insights, practical learning, and connections to make that happen. Link: https://condens.io/guides/ux-conference-guide-2026/
+DESCRIPTION:Typ: Research, Product, Design\nLink: https://condens.io/guides/ux-conference-guide-2026/
 END:VEVENT
 BEGIN:VEVENT
 UID:843537c576e591036fadef7b0c7fc835
-SUMMARY:[CONFERENCE] 35th UXPA International 2026 Conference
+SUMMARY:35th UXPA International 2026 Conference
 DTSTART;VALUE=DATE:20260622
 DTEND;VALUE=DATE:20260625
 LOCATION:Caesars Palace Las Vegas Hotel and Casino, 3570 S Las Vegas Blvd, Las Vegas, NV 89109
-DESCRIPTION:Meet up with fellow UX professionals from around the world for four days of amazing content and camaraderie! A Monday of full and half-day workshops followed by three days of keynotes, panels, sessions, and networking opportunities during the full conference. Link: https://uxpa.org/conferences-events/
+DESCRIPTION:Typ: Conference\nLink: https://uxpa.org/conferences-events/
 END:VEVENT
 BEGIN:VEVENT
 UID:ed3534257860f9a4738515fa10d79140
-SUMMARY:[EVENT SERIES] Government Innovation Week Federal
+SUMMARY:Government Innovation Week Federal
 DTSTART;VALUE=DATE:20260224
 DTEND;VALUE=DATE:20260225
 LOCATION:University of Ottawa & Ottawa Conference & Event Centre, Ottawa
-DESCRIPTION:Innovate to elevate: Unlocking the path to progressive governance As we move into 2026, public sector transformation and innovation remain crucial for shaping responsive and resilient governance. The evolution from Gov 2.0's digital services to Gov 3.0's intelligent, integrated systems offers governments unprecedented opportunities to enhance service delivery, improve efficiency, and foster greater civic engagement—aligning with the federal government's commitment to digital government and service excellence. By embracing smart technologies, data analytics, and AI, public administrations can do more with less, boost productivity, and ensure policies are more adaptive to citizens' evolving needs through personalized, proactive governance. This transformation involves cultivating a culture of continuous improvement and innovation within public entities, maximizing impact with constrained resources.Government Innovation Week Federal brings together Federal leaders to integrate Gov 3.0 innovations while safeguarding equity, privacy, and security—core priorities of the current government's mandate. Join us to explore strategies for navigating digital transformation complexities, enhancing operational productivity, and prioritizing accessibility to bridge the digital divide, supporting the government's commitment to inclusive digital services. Register now to connect with experts from Public Safety Canada, Export Development Canada, Service Canada, the Department of National Defence, and more, engage in meaningful discussions, and be part of the movement setting a new benchmark for governance in the digital age. Link: https://publicsectornetwork.com/events/government-innovation-week-federal-ottawa-2026/
+DESCRIPTION:Typ: Event Series\nLink: https://publicsectornetwork.com/events/government-innovation-week-federal-ottawa-2026/
 END:VEVENT
 BEGIN:VEVENT
 UID:30b844e64825ebe0956d5bc2269a6868
-SUMMARY:[CALL FOR SUBMISSIONS] OECD Call for Government Innovations 2026 Edition
+SUMMARY:OECD Call for Government Innovations 2026 Edition
 DTSTART;VALUE=DATE:20260224
 DTEND;VALUE=DATE:20260331
 LOCATION:Online / Global
-DESCRIPTION:The 8th OECD Call for Government Innovations invites global submissions from public servants and those working closely with the public sector. The call aims to identify and share new, implemented, and impactful innovations, particularly across themes like simplifying government, citizen-government relationships, and measuring efficiency/effectiveness. Selected cases will be published in the OPSI Case Study Library and the 2026 OECD report, with outstanding shortlisted cases invited to a global showcase event in Paris. Link: https://oecd-opsi.org/blog/the-oecd-call-for-government-innovations-2026-edition/
+DESCRIPTION:Typ: Call for Submissions\nLink: https://oecd-opsi.org/blog/the-oecd-call-for-government-innovations-2026-edition/
 END:VEVENT
 BEGIN:VEVENT
 UID:d490fa44810f5a0f7c4cf528c59fecaf
-SUMMARY:[REPORT] GovTech Trends 2026: A government perspective
+SUMMARY:GovTech Trends 2026: A government perspective
 DTSTART;VALUE=DATE:20260101
 DTEND;VALUE=DATE:20261231
 LOCATION:
-DESCRIPTION:This report provides a government-specific take on Deloitte’s Tech Trends 2026, spotlighting the accelerating technology trends most likely to disrupt enterprise IT over the next 18 to 24 months. It explores innovations most relevant for governments and assesses their readiness to scale, focusing on how public sector organizations can harness emerging technologies, especially AI, to redesign processes, align investments with mission objectives, and transform operations for the future. Key topics include 'AI goes physical: Navigating the convergence of AI and robotics' and 'The agentic reality check: Preparing for a silicon-based workforce'. Link: https://www.deloitte.com/us/en/Industries/government-public/articles/government-tech-trends.html
+DESCRIPTION:Typ: Report\nLink: https://www.deloitte.com/us/en/Industries/government-public/articles/government-tech-trends.html
 END:VEVENT
 BEGIN:VEVENT
 UID:4dafba861b5a11b9de0b979f1ea6a27f
-SUMMARY:[PRE-SUMMIT EVENT] Pre-Summit Event for 2026 AI Impact Summit
+SUMMARY:Pre-Summit Event for 2026 AI Impact Summit
 DTSTART;VALUE=DATE:20260213
 DTEND;VALUE=DATE:20260213
 LOCATION:
-DESCRIPTION:An event serving as a prelude to the main 2026 AI Impact Summit, for which a recap was published on February 13, 2026. Link: https://datainnovation.org/2026/02/public-sector-ai-adoption-index-2026/
+DESCRIPTION:Typ: Pre-Summit Event\nLink: https://datainnovation.org/2026/02/public-sector-ai-adoption-index-2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:d37c77bede552abef85ba2c771cd3139
+SUMMARY:SDN Global Café - From evidence to action
+DTSTART;VALUE=DATE:20260318
+DTEND;VALUE=DATE:20260318
+LOCATION:Zoom (Online)
+DESCRIPTION:Typ: Talk\nLink: https://www.service-design-network.org/
+END:VEVENT
+BEGIN:VEVENT
+UID:2124416eb82b04c2bba637b9cc448bdd
+SUMMARY:Inspire & Connect at UXCON26, where UX professionals, product managers, and engineers collaborate to design better experiences.
+DTSTART;VALUE=DATE:20261008
+DTEND;VALUE=DATE:20261008
+LOCATION:CIVIC CENTER, Silver Spring
+DESCRIPTION:Typ: Conference\nLink: https://www.uxconference.org/
+END:VEVENT
+BEGIN:VEVENT
+UID:6ddd07c1930cb2643e2382b12201da89
+SUMMARY:UX360 Virtual Research Summit
+DTSTART;VALUE=DATE:20260204
+DTEND;VALUE=DATE:20260205
+LOCATION:Online
+DESCRIPTION:Typ: Summit\nLink: https://www.interaction-design.org/literature/article/ux-conferences-2024?ep=Uxness&srsltid=AfmBOoql6ivdk9zJkeKz38vBp0rnUSNIroQ1XKBcl8DZglvUoArMmJAt
+END:VEVENT
+BEGIN:VEVENT
+UID:925bbef774410951ba34ce336be893de
+SUMMARY:Government Innovation Georgia
+DTSTART;VALUE=DATE:20260211
+DTEND;VALUE=DATE:20260211
+LOCATION:Atlanta Marriott NE Hotel, Atlanta, Georgia
+DESCRIPTION:Typ: Conference\nLink: https://publicsectornetwork.com/events/government-innovation-showcase-georgia/
+END:VEVENT
+BEGIN:VEVENT
+UID:83d53c131db5263a46fa3f66d76cbebb
+SUMMARY:Design Thinking for Researchers
+DTSTART;VALUE=DATE:20261007
+DTEND;VALUE=DATE:20261007
+LOCATION:Berlin
+DESCRIPTION:Typ: Workshop\nLink: https://falling-walls.com/design-thinking-researchers-071026
 END:VEVENT
 END:VCALENDAR
