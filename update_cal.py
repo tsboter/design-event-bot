@@ -36,8 +36,22 @@ client = genai.Client(api_key=GEMINI_KEY) if GEMINI_KEY else None
 def load_db():
     if os.path.exists(DATABASE_FILE):
         with open(DATABASE_FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
+            db = json.load(f)
+            # REPARATUR: Wir löschen alle "ignored" Einträge beim Laden,
+            # damit wir heute eine neue Chance haben, falls gestern nichts gefunden wurde.
+            db["events"] = {k: v for k, v in db["events"].items() if v.get("status") == "active"}
+            return db
     return {"events": {}}
+
+def extract_details_with_ai(text, source_url):
+    # Wir machen den Prompt etwas "hungriger"
+    prompt = (
+        f"Search the text from {source_url} for any professional Design/UX/Service Design events in 2026. "
+        f"Even if details are sparse, extract what you find. "
+        f"Format as JSON list: [{{summary, start(YYYYMMDD), end, location, type, description}}]. "
+        f"If you find multiple events, list them all. "
+        f"Text: {text}"
+    )
 
 def save_db(db):
     with open(DATABASE_FILE, "w", encoding="utf-8") as f:
