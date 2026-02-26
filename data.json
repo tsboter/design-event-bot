@@ -168,6 +168,16 @@
       "description": "A programme designed for researchers, hosted at the Young Entrepreneurs in Science learning space by the Falling Walls Foundation. The workshop runs from 9 am-6 pm. Spots are limited to approximately 25 participants and allocated on a first-come, first-served basis. Selected participants will receive a confirmation email with further details.",
       "link": "https://falling-walls.com/design-thinking-researchers-071026",
       "status": "active"
+    },
+    "37f60a5e43871f4502def3fd61aba035": {
+      "summary": "October 2026: EXECUTIVE Amsterdam",
+      "start": "20261005",
+      "end": "20261009",
+      "location": "Amsterdam, The Netherlands",
+      "type": "Workshop",
+      "description": "5-day 'Executive School' with a deeper emphasis on facilitation skills, project planning, and embedding service design in strategy and everyday business. Covers core tools and processes to start your own projects.",
+      "link": "https://www.thisisservicedesigndoing.com/school/june-2026-essentials-online",
+      "status": "active"
     }
   }
 }

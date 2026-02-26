@@ -1,8 +1,10 @@
 BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//DesignBot//DE
+PRODID:-//DesignEventBot//DE
 X-WR-CALNAME:Design Events 2026
+X-WR-TIMEZONE:Europe/Berlin
 METHOD:PUBLISH
+CALSCALE:GREGORIAN
 BEGIN:VEVENT
 UID:f257528534291f3a484759d114cc4d58
 SUMMARY:Service Design Global Conference 2026 (SDGC26)
@@ -130,5 +132,13 @@ DTSTART;VALUE=DATE:20261007
 DTEND;VALUE=DATE:20261007
 LOCATION:Berlin
 DESCRIPTION:Typ: Workshop\nLink: https://falling-walls.com/design-thinking-researchers-071026
+END:VEVENT
+BEGIN:VEVENT
+UID:37f60a5e43871f4502def3fd61aba035
+SUMMARY:October 2026: EXECUTIVE Amsterdam
+DTSTART;VALUE=DATE:20261005
+DTEND;VALUE=DATE:20261009
+LOCATION:Amsterdam, The Netherlands
+DESCRIPTION:Typ: Workshop\nLink: https://www.thisisservicedesigndoing.com/school/june-2026-essentials-online
 END:VEVENT
 END:VCALENDAR
