@@ -3,25 +3,26 @@ import json
 import hashlib
 import requests
 import time
+import random
 from bs4 import BeautifulSoup
 from google import genai
 
-# --- ANPASSBARE KONFIGURATION ---
-THEMEN = ["Service Design", "UX Design", "Public Sector Innovation"]
-FORMATE = ["Konferenz", "Workshop", "Meet-up", "Talk"]
-ORTE = ["Berlin", "Deutschland", "Europa", "Online"]
+# --- KONFIGURATION ---
+THEMEN = ["Service Design", "UX Design", "Public Sector Innovation", "Strategic Design"]
 
-# SEED-LISTE: Diese URLs werden IMMER geprüft
+# Sprachen-Mapping für die Suche
+SPRACH_MAPPING = {
+    "de": {"ort": "Deutschland", "formate": ["Konferenz", "Workshop", "Meet-up"]},
+    "en": {"ort": "Europe", "formate": ["Conference", "Workshop", "Summit", "Talk"]}
+}
+
 SEED_URLS = [
     "https://www.service-design-network.org/events",
-    "https://interaction-design.org/events",
     "https://uxpa.org/calendar/",
-    "https://www.ux-berlin.com/",
     "https://www.servicedesignglobalconference.com/",
     "https://uxconf.de/",
-    "https://www.interaction26.org/",
     "https://digitale-leute.de/summit/",
-    "https://www.euroia.org/"
+    "https://www.interaction26.org/"
 ]
 
 # API-Einstellungen
@@ -34,77 +35,30 @@ TARGET_MODEL = "models/gemini-2.5-flash"
 client = genai.Client(api_key=GEMINI_KEY) if GEMINI_KEY else None
 
 def load_db():
+    """Lädt die Datenbank und entfernt ignorierte Einträge für einen frischen Versuch."""
     if os.path.exists(DATABASE_FILE):
-        with open(DATABASE_FILE, "r", encoding="utf-8") as f:
-            db = json.load(f)
-            # REPARATUR: Wir löschen alle "ignored" Einträge beim Laden,
-            # damit wir heute eine neue Chance haben, falls gestern nichts gefunden wurde.
-            db["events"] = {k: v for k, v in db["events"].items() if v.get("status") == "active"}
-            return db
+        try:
+            with open(DATABASE_FILE, "r", encoding="utf-8") as f:
+                db = json.load(f)
+                # Filter: Wir behalten nur die echten Events (status: active)
+                # Damit bekommen 'ignored' Links beim nächsten Run eine neue Chance.
+                active_events = {k: v for k, v in db.get("events", {}).items() if v.get("status") == "active"}
+                return {"events": active_events}
+        except:
+            pass
     return {"events": {}}
-
-def extract_details_with_ai(text, source_url):
-    # Wir machen den Prompt etwas "hungriger"
-    prompt = (
-        f"Search the text from {source_url} for any professional Design/UX/Service Design events in 2026. "
-        f"Even if details are sparse, extract what you find. "
-        f"Format as JSON list: [{{summary, start(YYYYMMDD), end, location, type, description}}]. "
-        f"If you find multiple events, list them all. "
-        f"Text: {text}"
-    )
 
 def save_db(db):
     with open(DATABASE_FILE, "w", encoding="utf-8") as f:
         json.dump(db, f, indent=2, ensure_ascii=False)
 
-def process_url(link, db):
-    """Scraped eine URL und füttert die KI."""
-    link_id = hashlib.md5(link.encode()).hexdigest()
-    if link_id in db["events"]: 
-        return False # Schon bekannt
-
-    print(f"  * Analysiere: {link}")
-    try:
-        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
-        page = requests.get(link, headers=headers, timeout=15).text
-        content = BeautifulSoup(page, 'html.parser').get_text()[:5000]
-        
-        time.sleep(2)
-        found_events = extract_details_with_ai(content, link)
-        
-        new_found = False
-        for event in found_events:
-            if not event or not event.get("start") or not event.get("summary"):
-                continue
-            
-            # Inhalts-Check (Titel + Datum)
-            is_dupe = False
-            for eid, e in db["events"].items():
-                if e.get("summary") == event["summary"] and e.get("start") == event["start"]:
-                    is_dupe = True
-                    break
-            
-            if not is_dupe:
-                event["link"] = link
-                event["status"] = "active"
-                db["events"][link_id + "_" + str(time.time())] = event
-                print(f"    ✅ NEU: {event['summary']}")
-                new_found = True
-        
-        if not found_events:
-            db["events"][link_id] = {"status": "ignored"}
-            
-        return new_found
-    except Exception as e:
-        print(f"    ❌ Fehler bei {link}: {e}")
-        return False
-
 def extract_details_with_ai(text, source_url):
+    """KI-Prompt: Aggressiver auf Events programmiert."""
     prompt = (
-        f"Extrahiere Events für 2026 (Formate: {', '.join(FORMATE)}). "
-        f"Fokus auf Regionen: {', '.join(ORTE)}. "
-        f"Antworte NUR als JSON-Liste: [{{summary, start(YYYYMMDD), end, location, type, description}}]. "
-        f"Quelle: {source_url}. Text: {text}"
+        f"Search the text from {source_url} for professional Design, UX, or Service Design events in 2026. "
+        f"Format as a JSON list: [{{summary, start(YYYYMMDD), end(YYYYMMDD), location, type, description}}]. "
+        f"If the text contains any event information, extract it. If not, return an empty list []. "
+        f"Text to analyze: {text}"
     )
     try:
         response = client.models.generate_content(
@@ -117,8 +71,56 @@ def extract_details_with_ai(text, source_url):
     except:
         return []
 
+def process_url(link, db):
+    """Verarbeitet eine einzelne URL."""
+    link_id = hashlib.md5(link.encode()).hexdigest()
+    if link_id in db["events"]:
+        return False # Schon als aktives Event bekannt
+
+    print(f"  * Scrape: {link}")
+    try:
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
+        response = requests.get(link, headers=headers, timeout=15)
+        soup = BeautifulSoup(response.text, 'html.parser')
+        # Wir entfernen unnötigen Ballast für die KI
+        for s in soup(["script", "style", "nav", "footer", "header"]): s.decompose()
+        content = soup.get_text()[:5000]
+        
+        time.sleep(2)
+        found_events = extract_details_with_ai(content, link)
+        
+        new_added = False
+        for event in found_events:
+            if not event or not event.get("start") or not event.get("summary"):
+                continue
+            
+            # Dubletten-Check innerhalb der aktiven Events
+            is_dupe = any(e.get("summary") == event["summary"] and e.get("start") == event["start"] 
+                         for e in db["events"].values())
+            
+            if not is_dupe:
+                event["link"] = link
+                event["status"] = "active"
+                # Eindeutige ID für dieses spezifische Event
+                event_uid = hashlib.md5((event["summary"] + event["start"]).encode()).hexdigest()
+                db["events"][event_uid] = event
+                print(f"    ✅ GEFUNDEN: {event['summary']} ({event['start']})")
+                new_added = True
+        return new_added
+    except Exception as e:
+        print(f"    ❌ Fehler: {e}")
+        return False
+
 def generate_ics(db):
-    ics = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//DesignBot//DE", "X-WR-CALNAME:Design Events 2026", "METHOD:PUBLISH"]
+    """Erstellt die ICS-Datei basierend auf allen aktiven Events."""
+    ics = [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "PRODID:-//DesignBot//DE",
+        "X-WR-CALNAME:Design Events Europe 2026",
+        "X-WR-TIMEZONE:Europe/Berlin",
+        "METHOD:PUBLISH"
+    ]
     for eid, e in db["events"].items():
         if e.get("status") == "active":
             ics.extend([
@@ -127,8 +129,8 @@ def generate_ics(db):
                 f"SUMMARY:{e['summary']}",
                 f"DTSTART;VALUE=DATE:{e['start']}",
                 f"DTEND;VALUE=DATE:{e.get('end', e['start'])}",
-                f"LOCATION:{e.get('location','Berlin/Online')}",
-                f"DESCRIPTION:Link: {e.get('link','')}",
+                f"LOCATION:{e.get('location','Online/TBA')}",
+                f"DESCRIPTION:Quelle: {e.get('link','')}\\n{e.get('description','')}",
                 "END:VEVENT"
             ])
     ics.append("END:VCALENDAR")
@@ -138,28 +140,34 @@ def generate_ics(db):
 def main():
     db = load_db()
     
-    # 1. Zuerst die Seed-Liste abarbeiten
-    print(">>> Verarbeite Seed-Liste...")
+    # 1. Seed-URLs
+    print(">>> Prüfe Seed-Liste...")
     for url in SEED_URLS:
         process_url(url, db)
         save_db(db)
 
-    # 2. Dann die Google-Suche
-    print("\n>>> Starte Google-Suche...")
-    for thema in THEMEN:
-        for ort in ORTE[:2]: # Nur Berlin & Deutschland für die Suche
-            query = f"{thema} Event {ort} 2026"
+    # 2. Rotierende Suche (2 zufällige Sprachen pro Run)
+    sprachen = list(SPRACH_MAPPING.keys())
+    auswahl = random.sample(sprachen, 2)
+    print(f"\n>>> Suche in Sprachen: {auswahl}")
+
+    for lang in auswahl:
+        conf = SPRACH_MAPPING[lang]
+        for thema in THEMEN:
+            query = f"{thema} {conf['formate'][0]} {conf['ort']} 2026"
+            print(f"--- Query: {query} ---")
             try:
-                res = requests.post("https://google.serper.dev/search", 
-                                    headers={'X-API-KEY': SERPER_KEY},
-                                    json={"q": query, "num": 5}).json()
-                for item in res.get('organic', []):
+                r = requests.post("https://google.serper.dev/search", 
+                                  headers={'X-API-KEY': SERPER_KEY},
+                                  json={"q": query, "num": 8}).json()
+                for item in r.get('organic', []):
                     process_url(item['link'], db)
                     save_db(db)
-            except: continue
+            except:
+                continue
 
     generate_ics(db)
-    print("\n>>> Kalender aktualisiert!")
+    print("\n>>> Fertig! events.ics wurde aktualisiert.")
 
 if __name__ == "__main__":
     main()
