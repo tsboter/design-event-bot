@@ -4,4 +4,44 @@ PRODID:-//DesignBot//DE
 X-WR-CALNAME:Design Events Europe 2026
 X-WR-TIMEZONE:Europe/Berlin
 METHOD:PUBLISH
+BEGIN:VEVENT
+UID:afae9c386ad3f94ede66a3933dee22e0
+SUMMARY:SDN Global Café - From evidence to action
+DTSTART;VALUE=DATE:20260318
+DTEND;VALUE=DATE:20260318
+LOCATION:Zoom
+DESCRIPTION:Quelle: https://www.service-design-network.org/events\nFrom Evidence to Action: Join the SDN Global Café Exploring the UK’s First Public Design Evidence Review with Professor Lucy Kimbell and David Singer. Join us on 18 March, 2026!
+END:VEVENT
+BEGIN:VEVENT
+UID:044d3a058ed72c53780d0d65a728aa42
+SUMMARY:Service Design Global Conference 2026
+DTSTART;VALUE=DATE:20261028
+DTEND;VALUE=DATE:20261030
+LOCATION:Wiesbaden, Germany and online
+DESCRIPTION:Quelle: https://www.service-design-network.org/events\nJoin us for the Service Design Global Conference 2026 (SDGC26) in Germany and online on 28-30 October!
+END:VEVENT
+BEGIN:VEVENT
+UID:9fcb944b38ad6e126d346f60c4b52cb8
+SUMMARY:IN SESSION: Designing Leadership in a World Changed by AI
+DTSTART;VALUE=DATE:20260305
+DTEND;VALUE=DATE:20260305
+LOCATION:London
+DESCRIPTION:Quelle: https://www.service-design-network.org/events\nThis free talk will explore what it truly takes to design the right conditions for leadership. So people can organise themselves mindfully, partner effectively with AI, and lead change that lasts.
+END:VEVENT
+BEGIN:VEVENT
+UID:e2f2c39719c94b570e1196bed12d36de
+SUMMARY:Digitale Leute Summit 2026
+DTSTART;VALUE=DATE:20261117
+DTEND;VALUE=DATE:20261118
+LOCATION:Cologne, Germany
+DESCRIPTION:Quelle: https://digitale-leute.de/summit/\nGermany’s leading cross-functional professional education and networking event focused on software product development, including UX/Design. The summit targets UX-Designers, Product- and Digital Managers, and Software Engineers. Day 1 (November 17) is the AI Deep Dive Day at Smartvillage Cologne, focusing on the practical application of AI across product, design, and engineering. Day 2 (November 18) is the Conference Day at Palladium Cologne, featuring talks, interviews, panels, and masterclasses for Product, Engineering, and UX Design professionals to learn how to develop better digital products.
+END:VEVENT
+BEGIN:VEVENT
+UID:5b8d3e233e8d7d696ace89492c9898bb
+SUMMARY:Meetup #90: Produktorientering og designkultur
+DTSTART;VALUE=DATE:20260311
+DTEND;VALUE=DATE:20260311
+LOCATION:Trondheim, Norway
+DESCRIPTION:Quelle: https://ixda.org/event/service-design-global-conference-2026/\n
+END:VEVENT
 END:VCALENDAR

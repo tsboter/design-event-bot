@@ -1,3 +1,54 @@
 {
-  "events": {}
+  "events": {
+    "afae9c386ad3f94ede66a3933dee22e0": {
+      "summary": "SDN Global Café - From evidence to action",
+      "start": "20260318",
+      "end": "20260318",
+      "location": "Zoom",
+      "type": "SDN Global Café",
+      "description": "From Evidence to Action: Join the SDN Global Café Exploring the UK’s First Public Design Evidence Review with Professor Lucy Kimbell and David Singer. Join us on 18 March, 2026!",
+      "link": "https://www.service-design-network.org/events",
+      "status": "active"
+    },
+    "044d3a058ed72c53780d0d65a728aa42": {
+      "summary": "Service Design Global Conference 2026",
+      "start": "20261028",
+      "end": "20261030",
+      "location": "Wiesbaden, Germany and online",
+      "type": "Global Conference",
+      "description": "Join us for the Service Design Global Conference 2026 (SDGC26) in Germany and online on 28-30 October!",
+      "link": "https://www.service-design-network.org/events",
+      "status": "active"
+    },
+    "9fcb944b38ad6e126d346f60c4b52cb8": {
+      "summary": "IN SESSION: Designing Leadership in a World Changed by AI",
+      "start": "20260305",
+      "end": "20260305",
+      "location": "London",
+      "type": "Talk",
+      "description": "This free talk will explore what it truly takes to design the right conditions for leadership. So people can organise themselves mindfully, partner effectively with AI, and lead change that lasts.",
+      "link": "https://www.service-design-network.org/events",
+      "status": "active"
+    },
+    "e2f2c39719c94b570e1196bed12d36de": {
+      "summary": "Digitale Leute Summit 2026",
+      "start": "20261117",
+      "end": "20261118",
+      "location": "Cologne, Germany",
+      "type": "Professional Conference",
+      "description": "Germany’s leading cross-functional professional education and networking event focused on software product development, including UX/Design. The summit targets UX-Designers, Product- and Digital Managers, and Software Engineers. Day 1 (November 17) is the AI Deep Dive Day at Smartvillage Cologne, focusing on the practical application of AI across product, design, and engineering. Day 2 (November 18) is the Conference Day at Palladium Cologne, featuring talks, interviews, panels, and masterclasses for Product, Engineering, and UX Design professionals to learn how to develop better digital products.",
+      "link": "https://digitale-leute.de/summit/",
+      "status": "active"
+    },
+    "5b8d3e233e8d7d696ace89492c9898bb": {
+      "summary": "Meetup #90: Produktorientering og designkultur",
+      "start": "20260311",
+      "end": "20260311",
+      "location": "Trondheim, Norway",
+      "type": "Design Meetup",
+      "description": "",
+      "link": "https://ixda.org/event/service-design-global-conference-2026/",
+      "status": "active"
+    }
+  }
 }
