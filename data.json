@@ -49,6 +49,246 @@
       "description": "",
       "link": "https://ixda.org/event/service-design-global-conference-2026/",
       "status": "active"
+    },
+    "094d2be6dcae23900315fc092823512d": {
+      "summary": "SDN Academy 2026",
+      "start": "20260206",
+      "end": "20260424",
+      "location": "Online / SDN Academy",
+      "type": "Service Design",
+      "description": "Turn Your Passion into Expertise – Become a Certified Practitioner! You want to build a solid foundation for your service design practice? You want to gather theoretical foundations, methodological skills and practical experience? Then this Service Design Practitioner Curriculum is the program for you!",
+      "link": "https://www.service-design-network.org/events",
+      "status": "active"
+    },
+    "0cec71803a6983ffde45042c5d0b3912": {
+      "summary": "Service Design Masterclasses Series: 4th Edition Open for Registration",
+      "start": "20260305",
+      "end": "20260305",
+      "location": "SDN Academy",
+      "type": "Service Design",
+      "description": "Strengthen your core skills, expand your capabilities, and earn professional accreditation from the Service Design Network Academy.",
+      "link": "https://www.service-design-network.org/events",
+      "status": "active"
+    },
+    "07ffae25f8eafd321a5056e3bf9e2443": {
+      "summary": "Service Design Global Conference 2026 (SDGC26)",
+      "start": "20261028",
+      "end": "20261030",
+      "location": "Frankfurt RheinMain region, Wiesbaden (RheinMain Congress Center) and online",
+      "type": "Service Design Conference, Workshops",
+      "description": "The Service Design Global Conference 2026 (SDGC26) takes place 28-30 October in the Frankfurt RheinMain region, both onsite at the RheinMain Congress Center in Wiesbaden and online. This event aims to discover how service design drives innovation and transforms modern organizations. The theme, 'Beyond Boundaries: Enabling Solutions That Shape Tomorrow,' explores moving past limits to shape resilient, meaningful futures through service design. The program includes workshops, an SDN Members Event, conference days with speakers, and networking opportunities.",
+      "link": "https://www.servicedesignglobalconference.com/",
+      "status": "active"
+    },
+    "ab0aa9c15394862cc8023099d808ae27": {
+      "summary": "Digitale Leute Summit 2026: Germany's leading cross-functional conference for Product, Engineering, and UX/Design.",
+      "start": "20261117",
+      "end": "20261118",
+      "location": "Cologne, Germany (AI Deep Dive Day at Smartvillage Cologne, Conference Day at Palladium Cologne)",
+      "type": "Conference, Professional Education, Networking Event",
+      "description": "The Digitale Leute Summit 2026 is a two-day event focused on software product development, with a strong emphasis on UX/Design. Day 1, the AI Deep Dive Day (November 17 at Smartvillage Cologne), offers a bootcamp-style experience on practical AI application across product, design, and engineering workflows. Day 2, the Conference Day (November 18 at Palladium Cologne), features international speakers, talks, interviews, panels, and masterclasses, providing insights into tools, tactics, and methods for developing better digital products for professionals in UX Design, Product, and Engineering.",
+      "link": "https://digitale-leute.de/summit/",
+      "status": "active"
+    },
+    "87031da64cf63f1095b85b94bd7d5514": {
+      "summary": "Service Design (SD) Conference Europe",
+      "start": "20260608",
+      "end": "20260612",
+      "location": "London",
+      "type": "Conference",
+      "description": "Momentum is gathering in the run up to the Service Design (SD) Conference Europe, as IRM UK launches the live agenda and announces the first speakers. The Service Design conference, co-founded by IRM UK and AssistKD in 2025, will take place in London from 8th to 12th June 2026. It will be co-located with the Enterprise and Business Architecture (EBA) Conference Europe and the Business Change and Transformation (BCT) Conference Europe (BCT), bringing together the worlds of architecture, transformation and service design. Jonathan Hunsley (AssistKD) and Victoria Banner (Royal London Group) will be holding a workshop on the afternoon of Wednesday June 10th on the topic of introducing service frameworks to enhance clarity, standards, and collaboration across the change ecosystem. For the conference agenda and how to book, please follow this link: https://irmuk.co.uk/2026/02/eba-bct-sd-conference-europe-2026-speakersarticle/",
+      "link": "https://www.assistkd.com/news/article/service-design-conference-agenda-now-live",
+      "status": "active"
+    },
+    "8980df12c88db009ee932e4bc1b3180f": {
+      "summary": "Service Design Conference Europe 2026",
+      "start": "20260608",
+      "end": "20260612",
+      "location": "Convene 133 Houndsditch, London; etc.venues Fenchurch Street, London",
+      "type": "Conference, Workshops, Exhibits",
+      "description": "Join us at the Service Design Conference Europe 2026, co-located with the Business Change & Transformation Conference and the Enterprise & Business Architecture Conference. This unique trio of events offers a transformative experience, redefining your understanding of Enterprise Architecture, Business Architecture, Service Design, Design strategies, and Business Change & Transformation.",
+      "link": "https://irmuk.co.uk/service-design-award-2026/",
+      "status": "active"
+    },
+    "c4c3d170f89cf4129ddc1d92529cefd9": {
+      "summary": "UX Discussion: How Junior Designers Can Stand Out",
+      "start": "20260224",
+      "end": "20260224",
+      "location": "Atlanta, United States",
+      "type": "UX Discussion",
+      "description": "",
+      "link": "https://ixda.org/event/service-design-global-conference-2026/",
+      "status": "active"
+    },
+    "983dca4bae4a3ad394c38c14e43a5160": {
+      "summary": "UX Speed Networking",
+      "start": "20260218",
+      "end": "20260218",
+      "location": "Irvine, United States",
+      "type": "UX Networking",
+      "description": "",
+      "link": "https://ixda.org/event/service-design-global-conference-2026/",
+      "status": "active"
+    },
+    "9b763d9731e8a021982a72c10e942eed": {
+      "summary": "Gamification in Fintech: From Boosting Engagement to Becoming a Lovemark",
+      "start": "20260128",
+      "end": "20260128",
+      "location": "Online",
+      "type": "Session",
+      "description": "Craft Innovations holds a session to explore how gamification impacts product goals, like retention, feature adoption, transaction frequency, loyalty, and more. Ideal for Product Managers in fintech and banking; UX / CX designers working on complex products; founders building consumer or B2B fintech solutions; innovation, growth, and digital teams.",
+      "link": "https://www.interaction-design.org/literature/article/ux-conferences-calendar?srsltid=AfmBOoo7C52rsF4XF7bJf9V98RwciZt2UUcVgVzIdHmi-fQWPg5wZaUE",
+      "status": "active"
+    },
+    "03bdd37d584f8df1c2d46a92ea447085": {
+      "summary": "AWE Asia 2026",
+      "start": "20260202",
+      "end": "20260204",
+      "location": "Singapore and online (Singapore Expo)",
+      "type": "Conference",
+      "description": "AWE Asia is the region's leading annual conference for the Extended Reality (XR) industry, spanning Augmented Reality (AR), Virtual Reality (VR), and related Metaverse technologies. It brings together XR enterprise adopters, solution providers, developers, investors, creators, governments, and media. The conference includes two days of thought-provoking sessions, extensive networking opportunities, and an expo. Ideal for AR, XR, and VR practitioners.",
+      "link": "https://www.interaction-design.org/literature/article/ux-conferences-calendar?srsltid=AfmBOoo7C52rsF4XF7bJf9V98RwciZt2UUcVgVzIdHmi-fQWPg5wZaUE",
+      "status": "active"
+    },
+    "4de7db192c026807e687685e09d6a31e": {
+      "summary": "UX360 Virtual Research Summit",
+      "start": "20260204",
+      "end": "20260205",
+      "location": "Online",
+      "type": "Virtual Summit",
+      "description": "A two-day virtual summit focused on sharpening UX research skills and gaining inspiration from real-world case studies. It offers insights, practical frameworks, and live discussions with UX leaders. Ideal for anyone deep into UX research or shaping product strategy.",
+      "link": "https://www.interaction-design.org/literature/article/ux-conferences-calendar?srsltid=AfmBOoo7C52rsF4XF7bJf9V98RwciZt2UUcVgVzIdHmi-fQWPg5wZaUE",
+      "status": "active"
+    },
+    "1070a16a25c2a1b7585825859407a12c": {
+      "summary": "The prompt:UX Conference focuses on the intersection of artificial intelligence and user experience design, gathering designers, researchers, and product managers to explore how AI is reshaping UX.",
+      "start": "20260121",
+      "end": "20260122",
+      "location": "Berlin, Germany",
+      "type": "in-person",
+      "description": "The prompt:UX Conference focuses on the intersection of artificial intelligence and user experience design, gathering designers, researchers, and product managers to explore how AI is reshaping UX and how to prepare strategies, tools, and workflows accordingly. Expect engaging keynotes from industry leaders, hands-on workshops, case studies, and a dedicated networking reception, all aimed at helping your team integrate AI into UX in meaningful, future-ready ways. If you’re looking to stay at the forefront of AI-powered UX design and research, this conference offers the insights, practical learning, and connections to make that happen.",
+      "link": "https://condens.io/guides/ux-conference-guide-2026/",
+      "status": "active"
+    },
+    "acb6b7893fea51a0710259843c22b9e3": {
+      "summary": "DDX Tokyo brings together leaders in digital innovation, UX, design, product, and customer research. The theme \"Innovation Meets Impact\" emphasizes how user experience, AI, and strategic design converge to deliver measurable business outcomes.",
+      "start": "20260204",
+      "end": "20260204",
+      "location": "Tokyo, Japan",
+      "type": "in-person",
+      "description": "DDX Tokyo brings together leaders in digital innovation, UX, design, product, and customer research. The theme \"Innovation Meets Impact\" emphasizes how user experience, AI, and strategic design converge to deliver measurable business outcomes. Expect a one-day programme of keynotes, panels, round-tables, and networking in a dynamic global setting.",
+      "link": "https://condens.io/guides/ux-conference-guide-2026/",
+      "status": "active"
+    },
+    "7626c3184f91eeccd3fa5266fc02ca30": {
+      "summary": "The UX360 Virtual Summit is a global online event for UX researchers and designers from around the world. It covers the full research journey — from planning and conducting studies to turning insights into actionable business outcomes.",
+      "start": "20260204",
+      "end": "20260205",
+      "location": "Online",
+      "type": "online",
+      "description": "The UX360 Virtual Summit is a global online event for UX researchers and designers from around the world. It covers the full research journey — from planning and conducting studies to turning insights into actionable business outcomes. Expect impactful keynotes, real-world case studies, interactive panels, round-tables, and high-value networking sessions — all delivered virtually. This is the must-attend virtual summit for UX research practitioners looking to level up their insight practice, connect globally, and drive measurable impact.",
+      "link": "https://condens.io/guides/ux-conference-guide-2026/",
+      "status": "active"
+    },
+    "0a1d0177c375d6f09daf5d790784c224": {
+      "summary": "DDX Dubai is a two-day conference that",
+      "start": "20260207",
+      "end": "20260208",
+      "location": "Dubai, UAE",
+      "type": "in-person",
+      "description": "DDX Dubai is a two-day conference that",
+      "link": "https://condens.io/guides/ux-conference-guide-2026/",
+      "status": "active"
+    },
+    "3ecafe44cf14b1dac33198908f8d0d7c": {
+      "summary": "UX360 Europe: The #1 User Experience (UX) Research Summit in Europe",
+      "start": "20260623",
+      "end": "20260624",
+      "location": "Berlin, Germany",
+      "type": "UX Research Summit",
+      "description": "The flagship global gathering for UX professionals and innovators, UX360 Europe brings together leading UX minds to explore cutting-edge strategies, share real-world case studies, and uncover insights that deliver measurable ROI. Covering the entire research journey from planning and conducting studies to turning insights into actionable business outcomes, the event features thought-provoking keynotes, interactive panels, inspiring round-tables, and high-value 1-to-1 networking. It is a must-attend event for UX researchers & designers seeking inspiration, knowledge, and connections, focusing on empowering UX research to influence, scale & lead with the theme: 'From Invisible to Indispensable'.",
+      "link": "https://eu.ux360summit.com/",
+      "status": "active"
+    },
+    "310a0594a5acb6be04ff20d13a3c0780": {
+      "summary": "DDX Innovation & UX Conference",
+      "start": "20260121",
+      "end": "20260122",
+      "location": "Berlin, Germany",
+      "type": "UX",
+      "description": "Professional event focusing on UX and innovation.",
+      "link": "https://qubika.com/blog/list-of-ux-ui-conferences-2026/",
+      "status": "active"
+    },
+    "b6b258f6fdae3cbd969a53da2d20b50a": {
+      "summary": "UX360 Virtual Summit",
+      "start": "20260204",
+      "end": "20260205",
+      "location": "Online",
+      "type": "UX",
+      "description": "Professional virtual summit covering various aspects of UX.",
+      "link": "https://qubika.com/blog/list-of-ux-ui-conferences-2026/",
+      "status": "active"
+    },
+    "669c4dfda07d6420d7854cc7a625608b": {
+      "summary": "ConveyUX '26 A Leadership Summit",
+      "start": "20260413",
+      "end": "20260413",
+      "location": "Seattle, WA",
+      "type": "UX",
+      "description": "Professional UX leadership summit.",
+      "link": "https://qubika.com/blog/list-of-ux-ui-conferences-2026/",
+      "status": "active"
+    },
+    "dc374b187c12d5a6a34e2fd1a82904d0": {
+      "summary": "UXDX 2026",
+      "start": "20260511",
+      "end": "20260513",
+      "location": "New York, NYC",
+      "type": "UX",
+      "description": "Professional conference focusing on UX and development.",
+      "link": "https://qubika.com/blog/list-of-ux-ui-conferences-2026/",
+      "status": "active"
+    },
+    "8f3e68e439335d8883e8911a6cb7f0dd": {
+      "summary": "UXPA International 2026",
+      "start": "20260622",
+      "end": "20260626",
+      "location": "Las Vegas, NV",
+      "type": "UX",
+      "description": "International professional UX conference.",
+      "link": "https://qubika.com/blog/list-of-ux-ui-conferences-2026/",
+      "status": "active"
+    },
+    "9e2b6a5f7d3c3c9c22e5a6717eac99ab": {
+      "summary": "Qubika's Pick UXCon Vienna",
+      "start": "20260916",
+      "end": "20260917",
+      "location": "Vienna, Austria",
+      "type": "UX",
+      "description": "Professional UX conference in Vienna.",
+      "link": "https://qubika.com/blog/list-of-ux-ui-conferences-2026/",
+      "status": "active"
+    },
+    "7cdc9663d92967df6cffda2be425769a": {
+      "summary": "DDX Innovation & UX Conference",
+      "start": "20260917",
+      "end": "20260917",
+      "location": "San Diego, CA",
+      "type": "UX",
+      "description": "Professional event focusing on UX and innovation.",
+      "link": "https://qubika.com/blog/list-of-ux-ui-conferences-2026/",
+      "status": "active"
+    },
+    "a422c71a43ec521c315e6df7f51bc898": {
+      "summary": "World Usability Congress 2026",
+      "start": "20261013",
+      "end": "20261015",
+      "location": "Graz, Austria",
+      "type": "UX",
+      "description": "International congress dedicated to usability and user experience.",
+      "link": "https://qubika.com/blog/list-of-ux-ui-conferences-2026/",
+      "status": "active"
     }
   }
 }
