@@ -236,4 +236,204 @@ DTEND;VALUE=DATE:20261015
 LOCATION:Graz, Austria
 DESCRIPTION:Quelle: https://qubika.com/blog/list-of-ux-ui-conferences-2026/\nInternational congress dedicated to usability and user experience.
 END:VEVENT
+BEGIN:VEVENT
+UID:5b4d302cb720b009296c233c8204695a
+SUMMARY:SDN Academy 2026: Service Design Practitioner Curriculum
+DTSTART;VALUE=DATE:20260206
+DTEND;VALUE=DATE:20260424
+LOCATION:
+DESCRIPTION:Quelle: https://www.service-design-network.org/events\nTurn Your Passion into Expertise – Become a Certified Practitioner! You want to build a solid foundation for your service design practice? You want to gather theoretical foundations, methodological skills and practical experience? Then this Service Design Practitioner Curriculum is the program for you!
+END:VEVENT
+BEGIN:VEVENT
+UID:eaedabbcd35cbcf4a842764adba0e42a
+SUMMARY:Design, Chat & Drink by the Service Design Drinks Zürich
+DTSTART;VALUE=DATE:20260304
+DTEND;VALUE=DATE:20260304
+LOCATION:Zürich
+DESCRIPTION:Quelle: https://www.service-design-network.org/events\nOur friends of the Service Design Drinks Zürich community are hosting a new event in a new format.
+END:VEVENT
+BEGIN:VEVENT
+UID:af3627159e4ee49fe0067e40b3f38a97
+SUMMARY:Gamification in Fintech
+DTSTART;VALUE=DATE:20260128
+DTEND;VALUE=DATE:20260128
+LOCATION:Online
+DESCRIPTION:Quelle: https://www.interaction-design.org/literature/article/ux-conferences-calendar?srsltid=AfmBOooOzbtBptzgLXMQE1iwK-YQWK9NuFUnzq_kjcyRaes393Xg9i11\nCraft Innovations holds the session 'Gamification in Fintech: From Boosting Engagement to Becoming a Lovemark' to explore how gamification impacts product goals, like retention, feature adoption, transaction frequency, loyalty, and more. Ideal for Product Managers in fintech and banking, UX/CX designers working on complex products, founders building consumer or B2B fintech solutions, and innovation, growth, and digital teams.
+END:VEVENT
+BEGIN:VEVENT
+UID:8deda094bafd9a9bb2998df57c9f7d16
+SUMMARY:prompt:UX
+DTSTART;VALUE=DATE:20260121
+DTEND;VALUE=DATE:20260122
+LOCATION:Berlin, Germany
+DESCRIPTION:Quelle: https://www.uxnordic.com/the-best-ux-conferences-2026\n
+END:VEVENT
+BEGIN:VEVENT
+UID:61fdafaa9b9a747437ccc01448419f1c
+SUMMARY:UX Nordic
+DTSTART;VALUE=DATE:20260415
+DTEND;VALUE=DATE:20260416
+LOCATION:Aarhus, Denmark
+DESCRIPTION:Quelle: https://www.uxnordic.com/the-best-ux-conferences-2026\n
+END:VEVENT
+BEGIN:VEVENT
+UID:8c34062418affff0afb4cb9453f1f54f
+SUMMARY:Smashing Conference
+DTSTART;VALUE=DATE:20260413
+DTEND;VALUE=DATE:20260416
+LOCATION:Amsterdam, the Netherlands
+DESCRIPTION:Quelle: https://www.uxnordic.com/the-best-ux-conferences-2026\n
+END:VEVENT
+BEGIN:VEVENT
+UID:2511c27ee5ecd2afc4301f7a51d935ae
+SUMMARY:Future Product Days
+DTSTART;VALUE=DATE:20260922
+DTEND;VALUE=DATE:20260924
+LOCATION:Copenhagen, Denmark
+DESCRIPTION:Quelle: https://www.uxnordic.com/the-best-ux-conferences-2026\n
+END:VEVENT
+BEGIN:VEVENT
+UID:9744f9e898363004471930b256ee5730
+SUMMARY:Women in Tech Fest
+DTSTART;VALUE=DATE:20261001
+DTEND;VALUE=DATE:20261001
+LOCATION:Philadelphia, USA
+DESCRIPTION:Quelle: https://www.uxnordic.com/the-best-ux-conferences-2026\n
+END:VEVENT
+BEGIN:VEVENT
+UID:41687c3a74e5537b1878dc30c5362c9d
+SUMMARY:DATE 2026 Conference
+DTSTART;VALUE=DATE:20260420
+DTEND;VALUE=DATE:20260422
+LOCATION:Verona, Italy
+DESCRIPTION:Quelle: https://www.date-conference.com/\nDATE 2026 (Design, Automation and Test in Europe) conference, held in Verona, Italy.
+END:VEVENT
+BEGIN:VEVENT
+UID:e7305899e34be9c29372913a182a0dc1
+SUMMARY:Design Operations London
+DTSTART;VALUE=DATE:20260313
+DTEND;VALUE=DATE:20260313
+LOCATION:London
+DESCRIPTION:Quelle: https://www.manchesterdigital.com/post/hyperact/the-best-of-uk-and-european-design-conferences-in-2026\nJoin leading DesignOps professionals in London for this year’s in-person event dedicated to exploring how operational excellence fuels adaptability, resilience, and strategic impact.
+END:VEVENT
+BEGIN:VEVENT
+UID:d1f3dfe931f5139f1b1eb6a12e06c3f7
+SUMMARY:Into Design systems
+DTSTART;VALUE=DATE:20260319
+DTEND;VALUE=DATE:20260320
+LOCATION:Virtual
+DESCRIPTION:Quelle: https://www.manchesterdigital.com/post/hyperact/the-best-of-uk-and-european-design-conferences-in-2026\nThe hands-on, online conference that teaches you how to build AI Design Systems and use Vibe Coding to supercharge your work. Learn the skills that will define the next era of Design Systems.
+END:VEVENT
+BEGIN:VEVENT
+UID:787746eef5063423b500a46a44b894a2
+SUMMARY:UX Rotterdam
+DTSTART;VALUE=DATE:20260416
+DTEND;VALUE=DATE:20260417
+LOCATION:Rotterdam
+DESCRIPTION:Quelle: https://www.manchesterdigital.com/post/hyperact/the-best-of-uk-and-european-design-conferences-in-2026\nWorkshops, keynotes, and evening events, all in one unforgettable experience at the heart of Europe’s most forward-thinking design city.
+END:VEVENT
+BEGIN:VEVENT
+UID:56c030dea97c5e9b315deed157c99323
+SUMMARY:Camp Digital
+DTSTART;VALUE=DATE:20260507
+DTEND;VALUE=DATE:20260507
+LOCATION:Manchester
+DESCRIPTION:Quelle: https://www.manchesterdigital.com/post/hyperact/the-best-of-uk-and-european-design-conferences-in-2026\nIlluminating talks and bright ideas on design and digital.
+END:VEVENT
+BEGIN:VEVENT
+UID:bead7843ce2912e55739938d95eda1c5
+SUMMARY:DDX Munch
+DTSTART;VALUE=DATE:20260509
+DTEND;VALUE=DATE:20260509
+LOCATION:
+DESCRIPTION:Quelle: https://www.manchesterdigital.com/post/hyperact/the-best-of-uk-and-european-design-conferences-in-2026\nAn event made for leaders in digital innovation, design, product, customer research and entrepreneurship.
+END:VEVENT
+BEGIN:VEVENT
+UID:2ec625d350dc8bc4ed630f83653521dc
+SUMMARY:User Experience Lisbon
+DTSTART;VALUE=DATE:20260512
+DTEND;VALUE=DATE:20260515
+LOCATION:Lisbon
+DESCRIPTION:Quelle: https://www.manchesterdigital.com/post/hyperact/the-best-of-uk-and-european-design-conferences-in-2026\nWorld experts will teach you all that matters today to push your career forward.
+END:VEVENT
+BEGIN:VEVENT
+UID:59fe9638d9fb78af35d96e69e9749c28
+SUMMARY:UX London
+DTSTART;VALUE=DATE:20260602
+DTEND;VALUE=DATE:20260604
+LOCATION:London
+DESCRIPTION:Quelle: https://www.manchesterdigital.com/post/hyperact/the-best-of-uk-and-european-design-conferences-in-2026\nTuesday focuses on building the right thing. Wednesday focuses on building the thing right. Thursday focuses on continuous improvement.
+END:VEVENT
+BEGIN:VEVENT
+UID:3cf4f3f1be88cc18d1a9a34951d19a30
+SUMMARY:UX Scotland
+DTSTART;VALUE=DATE:20260610
+DTEND;VALUE=DATE:20260611
+LOCATION:Edinburgh
+DESCRIPTION:Quelle: https://www.manchesterdigital.com/post/hyperact/the-best-of-uk-and-european-design-conferences-in-2026\nUX Scotland is a friendly, international conference for people working in UX, user-centred design, human-centred design, service design, and related digital disciplines.
+END:VEVENT
+BEGIN:VEVENT
+UID:c2b5e3c359dfee39c02e8d358bf44b20
+SUMMARY:Pixel Pioneers
+DTSTART;VALUE=DATE:20260619
+DTEND;VALUE=DATE:20260619
+LOCATION:Bristol
+DESCRIPTION:Quelle: https://www.manchesterdigital.com/post/hyperact/the-best-of-uk-and-european-design-conferences-in-2026\nAn affordable one-day conference of practical and inspiring front-end and UX/UI design talks, featuring eight world-class speakers.
+END:VEVENT
+BEGIN:VEVENT
+UID:c68ce66a232ece500a556221f3040009
+SUMMARY:Figma Config
+DTSTART;VALUE=DATE:20260623
+DTEND;VALUE=DATE:20260625
+LOCATION:Virtual
+DESCRIPTION:Quelle: https://www.manchesterdigital.com/post/hyperact/the-best-of-uk-and-european-design-conferences-in-2026\nYou’ll hear from the world’s leading product builders on the future of design and product development
+END:VEVENT
+BEGIN:VEVENT
+UID:9e9d0405e1512cde8d36bb83590b3090
+SUMMARY:Hatch Berlin
+DTSTART;VALUE=DATE:20260916
+DTEND;VALUE=DATE:20260918
+LOCATION:Berlin
+DESCRIPTION:Quelle: https://www.manchesterdigital.com/post/hyperact/the-best-of-uk-and-european-design-conferences-in-2026\nThe event where experienced UX & Design Professionals in Europe meet to learn, get inspired and connect.
+END:VEVENT
+BEGIN:VEVENT
+UID:426fe4d0441bcca5a0e5faf169cb0f11
+SUMMARY:SD in GOV
+DTSTART;VALUE=DATE:20260923
+DTEND;VALUE=DATE:20260925
+LOCATION:Edinburgh
+DESCRIPTION:Quelle: https://www.manchesterdigital.com/post/hyperact/the-best-of-uk-and-european-design-conferences-in-2026\nThe original international community event for anyone involved in designing and commissioning public services.
+END:VEVENT
+BEGIN:VEVENT
+UID:24538c77798458345f148896d14a82de
+SUMMARY:UX Brighton
+DTSTART;VALUE=DATE:20261106
+DTEND;VALUE=DATE:20261106
+LOCATION:Brighton
+DESCRIPTION:Quelle: https://www.manchesterdigital.com/post/hyperact/the-best-of-uk-and-european-design-conferences-in-2026\nUX Brighton uses a theme each year to bring the talks together. This has yet to be decided for 2026.
+END:VEVENT
+BEGIN:VEVENT
+UID:578ceec1b1726ca1b2fa9d208e21960c
+SUMMARY:Leading Design
+DTSTART;VALUE=DATE:20261111
+DTEND;VALUE=DATE:20261112
+LOCATION:London
+DESCRIPTION:Quelle: https://www.manchesterdigital.com/post/hyperact/the-best-of-uk-and-european-design-conferences-in-2026\nLeading Design is a two day gathering of design leaders from around the globe. It is lovingly curated.
+END:VEVENT
+BEGIN:VEVENT
+UID:72521ac420b32ef7defb3203b1c715d5
+SUMMARY:DESIGN 2026 - The 19th International Design Conference
+DTSTART;VALUE=DATE:20260518
+DTEND;VALUE=DATE:20260521
+LOCATION:Cavtat, Dubrovnik, Croatia
+DESCRIPTION:Quelle: https://www.designsociety.org/1449/design2026_-_the_19th_international_design_conference\nThe DESIGN Conference aims to bring together researchers and practitioners who have worked on or thought about engineering and industrial design from various perspectives, disciplines, and fields. It serves as a forum for discussing and advancing engineering design knowledge—spanning engineering design science, computer science, cognitive science, philosophy, methodological innovation, and the practical application of design research. The conference covers topics such as DESIGN THEORY AND RESEARCH METHODS, DESIGN ORGANISATION, COLLABORATION AND MANAGEMENT, DESIGN INFORMATION AND KNOWLEDGE, DESIGN METHODS AND TOOLS, HUMAN BEHAVIOUR AND DESIGN CREATIVITY, DESIGN FOR SUSTAINABILITY, DESIGN FOR HEALTHCARE, DESIGN FOR ADDITIVE MANUFACTURING, ARTIFICIAL INTELLIGENCE AND DATA-DRIVEN DESIGN, INDUSTRIAL DESIGN, SYSTEMS ENGINEERING AND DESIGN, DESIGN EDUCATION, and ENGINEERING DESIGN PRACTICE.
+END:VEVENT
+BEGIN:VEVENT
+UID:44bb5dc3a99b66dfdbb76835323b08ab
+SUMMARY:DSM 2026 - The International DSM Conference
+DTSTART;VALUE=DATE:20260929
+DTEND;VALUE=DATE:20261001
+LOCATION:Milan, Italy
+DESCRIPTION:Quelle: https://www.designsociety.org/1449/design2026_-_the_19th_international_design_conference\nThe International DSM Conference provides a platform for researchers, practitioners, and developers of DSM-related tools to exchange experiences, discuss trends, and showca
+END:VEVENT
 END:VCALENDAR
