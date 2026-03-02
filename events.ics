@@ -436,4 +436,52 @@ DTEND;VALUE=DATE:20261001
 LOCATION:Milan, Italy
 DESCRIPTION:Quelle: https://www.designsociety.org/1449/design2026_-_the_19th_international_design_conference\nThe International DSM Conference provides a platform for researchers, practitioners, and developers of DSM-related tools to exchange experiences, discuss trends, and showca
 END:VEVENT
+BEGIN:VEVENT
+UID:760007e048de93a0b448c6f3bede5d4a
+SUMMARY:Talking Shop + Art After Dark
+DTSTART;VALUE=DATE:20260227
+DTEND;VALUE=DATE:20260227
+LOCATION:Cincinnati, United States
+DESCRIPTION:Quelle: https://ixda.org/event/service-design-global-conference-2026/\n
+END:VEVENT
+BEGIN:VEVENT
+UID:49cca0ec183445d91b51494cb716e993
+SUMMARY:SmashingConf Amsterdam 2026
+DTSTART;VALUE=DATE:20260413
+DTEND;VALUE=DATE:20260416
+LOCATION:Pathé Tuschinski, Amsterdam, the Netherlands
+DESCRIPTION:Quelle: https://smashingconf.com/amsterdam-2026/\nA 4-day Smashing Conference on UX and front-end for designers, UI engineers, and UX professionals. The event includes 2 conference days with a single track featuring 12 speakers and 2 workshop days with 6 practical, deep-dive workshops. Topics covered include Design Systems, accessibility, Figma, UX writing, modern CSS, AI, leadership, data visualization, and human-centered interfaces, ranging from research to CSS and interface design. The conference focuses on real-world problems and solutions, offering practical and actionable insights through interactive sessions. It's an inclusive event for 550 attendees, providing networking opportunities, job opportunities, and side activities like morning runs, yoga, boat tours, and photo walks.
+END:VEVENT
+BEGIN:VEVENT
+UID:b4f26d70c292c02f7efc16cdd0fca6f4
+SUMMARY:Prompt:UX
+DTSTART;VALUE=DATE:20260121
+DTEND;VALUE=DATE:20260122
+LOCATION:Berlin, Germany
+DESCRIPTION:Quelle: https://condens.io/guides/ux-conference-guide-2026/\nThe prompt:UX Conference focuses on the intersection of artificial intelligence and user experience design, gathering designers, researchers, and product managers to explore how AI is reshaping UX and how to prepare strategies, tools, and workflows accordingly. Expect engaging keynotes from industry leaders, hands-on workshops, case studies, and a dedicated networking reception, all aimed at helping your team integrate AI into UX in meaningful, future-ready ways. If you’re looking to stay at the forefront of AI-powered UX design and research, this conference offers the insights, practical learning, and connections to make that happen.
+END:VEVENT
+BEGIN:VEVENT
+UID:efb2620020c6d9b0426a647f60e661e1
+SUMMARY:DDX Tokyo
+DTSTART;VALUE=DATE:20260204
+DTEND;VALUE=DATE:20260204
+LOCATION:Tokyo, Japan
+DESCRIPTION:Quelle: https://condens.io/guides/ux-conference-guide-2026/\nDDX Tokyo brings together leaders in digital innovation, UX, design, product, and customer research. The theme "Innovation Meets Impact" emphasizes how user experience, AI, and strategic design converge to deliver measurable business outcomes. Expect a one-day programme of keynotes, panels, round-tables, and networking in a dynamic global setting.
+END:VEVENT
+BEGIN:VEVENT
+UID:86053b86da192f424e9c43444ac6c965
+SUMMARY:DDX Dubai
+DTSTART;VALUE=DATE:20260207
+DTEND;VALUE=DATE:20260208
+LOCATION:Dubai, UAE
+DESCRIPTION:Quelle: https://condens.io/guides/ux-conference-guide-2026/\nDDX Dubai is a two-day conference tha
+END:VEVENT
+BEGIN:VEVENT
+UID:bfb19327d7939b9dc2192142e12d1f76
+SUMMARY:PUSH UX conference 2026
+DTSTART;VALUE=DATE:20261022
+DTEND;VALUE=DATE:20261023
+LOCATION:Munich, Germany
+DESCRIPTION:Quelle: https://push-conference.com/\nEurope’s largest international UX & Product Design event for experienced professionals, going strong since 2012. The conference takes place live in Munich, in the heart of Europe. It explores topics such as Product Design & UX Practice, Experience Economics, Shifting Careers, Practical AI, Design Impact, and Trends & Innovation. Attendees can connect with experienced Product Designers, UX Professionals, Researchers, User Minded Product Managers, and Creative Developers, from expert ICs to seasoned Leaders.
+END:VEVENT
 END:VCALENDAR
