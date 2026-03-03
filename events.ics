@@ -484,4 +484,132 @@ DTEND;VALUE=DATE:20261023
 LOCATION:Munich, Germany
 DESCRIPTION:Quelle: https://push-conference.com/\nEurope’s largest international UX & Product Design event for experienced professionals, going strong since 2012. The conference takes place live in Munich, in the heart of Europe. It explores topics such as Product Design & UX Practice, Experience Economics, Shifting Careers, Practical AI, Design Impact, and Trends & Innovation. Attendees can connect with experienced Product Designers, UX Professionals, Researchers, User Minded Product Managers, and Creative Developers, from expert ICs to seasoned Leaders.
 END:VEVENT
+BEGIN:VEVENT
+UID:3838fe126e17d2728e1bba1ada73dcdc
+SUMMARY:Recommended event: Design, Chat & Drink by the Service Design Drinks Zürich
+DTSTART;VALUE=DATE:20260304
+DTEND;VALUE=DATE:20260304
+LOCATION:Zürich
+DESCRIPTION:Quelle: https://www.service-design-network.org/events\nOur friends of the Service Design Drinks Zürich community are hosting a new event in a new format.
+END:VEVENT
+BEGIN:VEVENT
+UID:0efcf67c86a47335545786601ed4605c
+SUMMARY:WUD Estonia 2026
+DTSTART;VALUE=DATE:20260216
+DTEND;VALUE=DATE:20260220
+LOCATION:Tallinn, Estonia + ONLINE
+DESCRIPTION:Quelle: https://www.interaction-design.org/literature/article/ux-conferences-calendar?srsltid=AfmBOoqjGlraKsGPO-ArI_dn_U4KxfidfakrliuO1T_4IH8d6xM6espY\nWUD Estonia is the largest conference in the Baltics dedicated to decision makers, product creators, business leaders, and design professionals. Now returning to Tallinn for its 17th edition, WUD Estonia 2026 is focused on how design drives strategy.
+END:VEVENT
+BEGIN:VEVENT
+UID:6be1c47803d8c530cd939c816d84065f
+SUMMARY:PUSH UX 2026 – Europe’s UX & Product Design Event
+DTSTART;VALUE=DATE:20261022
+DTEND;VALUE=DATE:20261023
+LOCATION:Munich, Germany
+DESCRIPTION:Quelle: https://push-conference.com/\nPUSH UX 2026 is a professional conference for experienced UX & Product professionals. It's Europe’s UX & Product Design Event, held live in Munich. The event explores topics such as Product Design & UX Practice, Experience Economics, Shifting Careers, Practical AI, Design Impact, and Trends & Innovation. It aims to connect experienced Product Designers, UX Professionals, Researchers, User Minded Product Managers, and Creative Developers – from expert ICs to seasoned Leaders. This international UX conference has been going strong since 2012.
+END:VEVENT
+BEGIN:VEVENT
+UID:4f9d2d4257e212b3e5c497564cf2ede1
+SUMMARY:UX on the Beach
+DTSTART;VALUE=DATE:20260609
+DTEND;VALUE=DATE:20260610
+LOCATION:Venice on the Beach
+DESCRIPTION:Quelle: https://qubika.com/blog/list-of-ux-ui-conferences-2026/\n
+END:VEVENT
+BEGIN:VEVENT
+UID:364cec2ea1c4666dc0b3abb42483f072
+SUMMARY:UXCon Vienna
+DTSTART;VALUE=DATE:20260916
+DTEND;VALUE=DATE:20260917
+LOCATION:Vienna, Austria
+DESCRIPTION:Quelle: https://qubika.com/blog/list-of-ux-ui-conferences-2026/\n
+END:VEVENT
+BEGIN:VEVENT
+UID:a6d557d020b63d3b25f1e146885656ff
+SUMMARY:UX360 Europe: From Invisible to Indispensable
+DTSTART;VALUE=DATE:20260623
+DTEND;VALUE=DATE:20260624
+LOCATION:Berlin, Germany
+DESCRIPTION:Quelle: https://eu.ux360summit.com/\nThe flagship global gathering for UX professionals and innovators. It brings together thousands of UXers to network, learn, connect and be inspired, exploring cutting-edge strategies, sharing real-world case studies, and uncovering insights that deliver measurable ROI. Covers the entire research journey from planning and conducting studies to turning insights into actionable business outcomes, featuring thought-provoking keynotes, interactive panels, inspiring round-tables and high-value 1-to-1 networking. A must-attend event for UX researchers & designers seeking inspiration, knowledge, and connections.
+END:VEVENT
+BEGIN:VEVENT
+UID:57dd7aa211292e34788d315ed26ceb0c
+SUMMARY:Hatch Conference is a top design conference for UX designers, researchers, product teams, and design leaders.
+DTSTART;VALUE=DATE:20260916
+DTEND;VALUE=DATE:20260918
+LOCATION:Berlin, Germany
+DESCRIPTION:Quelle: https://www.hatchconference.com/blog/best-ux-and-design-conferences-in-europe-in-2026\nThree-day event featuring talks and workshops on technical design, strategy, business topics, and AI's impact on design work. Known for deep content, strong curation, and a community of experienced practitioners.
+END:VEVENT
+BEGIN:VEVENT
+UID:5fd3e1fb322327964de9f154b9009a45
+SUMMARY:A series of hands-on design leadership events across multiple European cities.
+DTSTART;VALUE=DATE:20260401
+DTEND;VALUE=DATE:20260531
+LOCATION:Multiple Locations (Barcelona, Lisbon, Berlin, Amsterdam)
+DESCRIPTION:Quelle: https://www.hatchconference.com/blog/best-ux-and-design-conferences-in-europe-in-2026\nHighly focused events for designers moving into or deepening their leadership practice. Offers small group workshops and masterclasses to develop strategic, communication, and people skills. Editions focus on specific aspects like complex industries, strategy alignment, transitioning to team lead, and senior leadership identity.
+END:VEVENT
+BEGIN:VEVENT
+UID:e2c7041f462ac58cce9e8a40512fee55
+SUMMARY:A flagship conference for design leaders focusing on leadership growth, people management, and organizational influence.
+DTSTART;VALUE=DATE:20261111
+DTEND;VALUE=DATE:20261112
+LOCATION:London, United Kingdom
+DESCRIPTION:Quelle: https://www.hatchconference.com/blog/best-ux-and-design-conferences-in-europe-in-2026\nTwo-day traditional single-track conference with multiple keynotes from experienced leaders in global tech. Attracts Heads of Design, Directors, and VPs. Optional workshops available separately.
+END:VEVENT
+BEGIN:VEVENT
+UID:8801b67a579344a5946ae9dc198702e9
+SUMMARY:A community-driven conference focused on practical design and front-end topics.
+DTSTART;VALUE=DATE:20260619
+DTEND;VALUE=DATE:20260619
+LOCATION:Bristol, United Kingdom
+DESCRIPTION:Quelle: https://www.hatchconference.com/blog/best-ux-and-design-conferences-in-europe-in-2026\nKnown for being affordable, friendly, and providing real-world insights from practitioners.
+END:VEVENT
+BEGIN:VEVENT
+UID:e5554b7204756c90fa77cce66467b5da
+SUMMARY:A respected UX event offering workshops, practical case studies, and community-led learning.
+DTSTART;VALUE=DATE:20260610
+DTEND;VALUE=DATE:20260611
+LOCATION:Edinburgh, Scotland
+DESCRIPTION:Quelle: https://www.hatchconference.com/blog/best-ux-and-design-conferences-in-europe-in-2026\nA great event for designers and researchers seeking actionable methods.
+END:VEVENT
+BEGIN:VEVENT
+UID:88a3cce9a7b086799ef152fa5a7d964f
+SUMMARY:The QRCA Annual Conference is a four-day gathering of qualitative research professionals to share and shape the future of qualitative research, including user-insights research.
+DTSTART;VALUE=DATE:20260202
+DTEND;VALUE=DATE:20260205
+LOCATION:San Antonio, USA
+DESCRIPTION:Quelle: https://condens.io/guides/ux-conference-guide-2026/\nThe QRCA Annual Conference is a four-day gathering of qualitative research professionals in Texas. It brings together researchers, moderators, analysts, strategists, suppliers, and insights partners across experience levels to share — and shape — the future of qualitative research. Expect a rich programme of interactive sessions, workshops, keynotes, small-group discussions, and networking designed to spark ideas, build skills, and deepen relationships in a fun, engaging environment. If you work in qualitative or user-insights research and want to grow your craft, expand your network, and stay at the forefront of the field, this conference delivers.
+END:VEVENT
+BEGIN:VEVENT
+UID:bfe6ed7995498f16c1edb2ae0f74e4f5
+SUMMARY:DDX Tokyo brings together leaders in digital innovation, UX, design, product, and customer research with a theme of Innovation Meets Impact.
+DTSTART;VALUE=DATE:20260204
+DTEND;VALUE=DATE:20260204
+LOCATION:Tokyo, Japan
+DESCRIPTION:Quelle: https://condens.io/guides/ux-conference-guide-2026/\nDDX Tokyo brings together leaders in digital innovation, UX, design, product, and customer research. The theme "Innovation Meets Impact" emphasizes how user experience, AI, and strategic design converge to deliver measurable business outcomes. Expect a one-day programme of keynotes, panels, round-tables, and networking in a dynamic global setting.
+END:VEVENT
+BEGIN:VEVENT
+UID:d2d32934c4d0fdb4430bf3d7174b6dc6
+SUMMARY:The UX360 Virtual Summit is a global online event for UX researchers and designers, covering the full research journey from planning to actionable insights.
+DTSTART;VALUE=DATE:20260204
+DTEND;VALUE=DATE:20260205
+LOCATION:Online
+DESCRIPTION:Quelle: https://condens.io/guides/ux-conference-guide-2026/\nThe UX360 Virtual Summit is a global online event for UX researchers and designers from around the world. It covers the full research journey — from planning and conducting studies to turning insights into actionable business outcomes. Expect impactful keynotes, real-world case studies, interactive panels, round-tables, and high-value networking sessions — all delivered virtually. This is the must-attend virtual summit for UX research practitioners looking to level up their insight practice, connect globally, and drive measurable impact.
+END:VEVENT
+BEGIN:VEVENT
+UID:c73d09f07a918a83e54fb1490045c308
+SUMMARY:Ignite Conference is India's first conference dedicated to user research, cultivating a vibrant space for learning, networking, and growth in the field.
+DTSTART;VALUE=DATE:20260206
+DTEND;VALUE=DATE:20260207
+LOCATION:Hyderabad, India
+DESCRIPTION:Quelle: https://condens.io/guides/ux-conference-guide-2026/\nIgnite Conference is India's first conference dedicated to user research and brings together a diverse lineup of voices shaping the practice of user research in India. By bringing together thought leaders, innovators, expert practitioners, business leaders and curious minds, Ignite Conference aims to cultivate a vibrant space where learning, networking, and growth converge.
+END:VEVENT
+BEGIN:VEVENT
+UID:00861c4f38ab5ccc187aa7f8f5d68568
+SUMMARY:DDX Dubai is a two-day conference focusing on Research, Product, and Design.
+DTSTART;VALUE=DATE:20260207
+DTEND;VALUE=DATE:20260208
+LOCATION:Dubai, UAE
+DESCRIPTION:Quelle: https://condens.io/guides/ux-conference-guide-2026/\nDDX Dubai is a two-day conference tha
+END:VEVENT
 END:VCALENDAR
