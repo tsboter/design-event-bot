@@ -4,7 +4,6 @@ PRODID:-//DesignBot//DE
 X-WR-CALNAME:Design Events 2026
 METHOD:PUBLISH
 BEGIN:VEVENT
-UID:399dfde6254942c9af671475514e98a0
 SUMMARY:SDN Global Conference
 DTSTART;VALUE=DATE:20260923
 DTEND;VALUE=DATE:20260925
@@ -12,7 +11,6 @@ LOCATION:London, UK
 DESCRIPTION:Link: N/A\nFormat: Event\nDescription: The annual global conference for service design professionals, bringing together practitioners, academics, and industry leaders from across Europe.
 END:VEVENT
 BEGIN:VEVENT
-UID:6aa0c19ddb6330c4927449091859ae1b
 SUMMARY:Service Design Masterclass
 DTSTART;VALUE=DATE:20260610
 DTEND;VALUE=DATE:20260610
@@ -20,7 +18,6 @@ LOCATION:Online
 DESCRIPTION:Link: N/A\nFormat: Event\nDescription: An intensive online masterclass on advanced service design methodologies, accessible globally.
 END:VEVENT
 BEGIN:VEVENT
-UID:62fea9fadfe97ad51d67dc918675cb41
 SUMMARY:Virtual Service Design Workshop
 DTSTART;VALUE=DATE:20261112
 DTEND;VALUE=DATE:20261114
