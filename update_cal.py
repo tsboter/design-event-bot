@@ -31,8 +31,7 @@ THEMEN = [
 SEED_URLS = [
     "https://www.service-design-network.org/events",
     "https://uxpa.org/calendar/",
-    "https://uxconf.de/",
-    "https://digitale-leute.de/summit/"
+    "https://uxconf.de/"
 ]
 
 DATABASE_FILE = "data.json"
@@ -53,48 +52,47 @@ def load_db():
 
 def extract_details_with_ai(text):
     prompt = (
-        "Extract professional Design/UX events for 2026 in Europe from the text. "
+        "Extract professional Design/UX/GovTech events for 2026 or 2027 in Europe from the text. "
         "Return a JSON list: [{\"summary\": \"...\", \"start\": \"YYYYMMDD\", \"end\": \"YYYYMMDD\", "
-        "\"location\": \"...\", \"type\": \"...\", \"relevance\": \"...\", \"is_confirmed\": true/false}]. "
-        "Use YYYYMMDD for dates. Text: " + text
+        "\"location\": \"...\", \"type\": \"...\", \"relevance\": \"...\", \"is_confirmed\": true}]. "
+        "Important: If you find an event but the exact day is missing, use YYYYMM01. "
+        "Text: " + text
     )
     try:
         response = client.models.generate_content(model=TARGET_MODEL, contents=prompt, config={'response_mime_type': 'application/json'})
+        # DEBUG: Zeig uns was die KI denkt
+        print(f"    [KI-Rohdaten]: {response.text[:200]}...") 
         data = json.loads(response.text)
         return data if isinstance(data, list) else [data]
-    except:
+    except Exception as e:
+        print(f"    [KI-Fehler]: {e}")
         return []
 
 def process_url(link, db):
-    # Dubletten-Check: Wenn der Link für ein aktives Event schon da ist, überspringen
-    if any(e.get("source_link") == link and e.get("status") == "active" for e in db["events"].values()):
-        return False
-
     print(f"  * Scrape: {link}")
     try:
-        headers = {'User-Agent': 'Mozilla/5.0'}
-        response = requests.get(link, headers=headers, timeout=15)
+        response = requests.get(link, headers={'User-Agent': 'Mozilla/5.0'}, timeout=15)
         soup = BeautifulSoup(response.text, 'html.parser')
-        for s in soup(["script", "style", "nav", "footer"]): s.decompose()
         content = soup.get_text()[:6000]
         
         found_events = extract_details_with_ai(content)
         
+        if not found_events:
+            print("    ∅ Keine Events auf dieser Seite gefunden.")
+            
         for event in found_events:
             start = str(event.get("start", ""))
-            
-            # Link-Zuweisung durch Python (sicherer als KI)
             event["source_link"] = link
             
-            # Status festlegen
-            if re.match(r"^\d{8}$", start) and event.get("is_confirmed") is True:
+            # LOCKERERE REGEL: Wenn ein Datum da ist, nehmen wir es erst mal auf!
+            if re.match(r"^\d{8}$", start):
                 event["status"] = "active"
             else:
                 event["status"] = "on_hold"
 
             uid = hashlib.md5((event.get("summary", "") + start).encode()).hexdigest()
             db["events"][uid] = event
-            print(f"    [{event['status'].upper()}] {event.get('summary')}")
+            print(f"    ✅ GEFUNDEN: {event.get('summary')} ({start})")
         return True
     except:
         return False
