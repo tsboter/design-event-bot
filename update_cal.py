@@ -11,7 +11,7 @@ from google import genai
 # --- CONFIG ---
 THEMEN = ["Service Design", "UX Design", "Public Sector Innovation", "Strategic Design"]
 SPRACH_MAPPING = {
-    "de": {"ort": "Deutschland", "formate": ["Konferenz", "Workshop", "Meet-up"]},
+    "de": {"ort": "Deutschland", "formate": ["Konferenz", "Workshop", "Meet-up", "Vortrag"]},
     "en": {"ort": "Europe", "formate": ["Conference", "Workshop", "Summit", "Talk"]}
 }
 
