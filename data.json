@@ -99,6 +99,56 @@
       "description": "Link: https://websummit.com/\nFormat: Technology Conference, Exhibitions\nInhalt: Tech, AI, Web Development, UI/UX Design, Startups, Venture Capital.",
       "status": "on_hold",
       "added_at": 1772719590.605745
+    },
+    "399dfde6254942c9af671475514e98a0": {
+      "summary": "SDN Global Conference",
+      "start": "20260923",
+      "end": "20260925",
+      "is_confirmed": true,
+      "location": "London, UK",
+      "description": "The annual global conference for service design professionals, bringing together practitioners, academics, and industry leaders from across Europe.",
+      "status": "active",
+      "added_at": 1772744769.3026252
+    },
+    "6aa0c19ddb6330c4927449091859ae1b": {
+      "summary": "Service Design Masterclass",
+      "start": "20260610",
+      "end": "20260610",
+      "is_confirmed": true,
+      "location": "Online",
+      "description": "An intensive online masterclass on advanced service design methodologies, accessible globally.",
+      "status": "active",
+      "added_at": 1772744769.3026352
+    },
+    "31dbf2a1b31870e63b1b08b582e466fa": {
+      "summary": "European Service Design Summit",
+      "start": "20261001",
+      "end": "20261031",
+      "is_confirmed": false,
+      "location": "Berlin, Germany",
+      "description": "A summit focusing on service design trends and innovations within the European context.",
+      "status": "on_hold",
+      "added_at": 1772744769.30264
+    },
+    "62fea9fadfe97ad51d67dc918675cb41": {
+      "summary": "Virtual Service Design Workshop",
+      "start": "20261112",
+      "end": "20261114",
+      "is_confirmed": true,
+      "location": "Online",
+      "description": "An interactive workshop focusing on remote collaboration and digital tools in service design, available worldwide.",
+      "status": "active",
+      "added_at": 1772744769.302643
+    },
+    "2d20a4e2219c7bd840836c9fe8a90797": {
+      "summary": "Nordic Service Design Festival",
+      "start": "20260501",
+      "end": "20260531",
+      "is_confirmed": false,
+      "location": "Copenhagen, Denmark",
+      "description": "A month-long celebration of service design across the Nordic region, featuring various local events and discussions.",
+      "status": "on_hold",
+      "added_at": 1772744769.3026457
     }
   }
 }
