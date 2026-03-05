@@ -5,7 +5,6 @@ import requests
 import time
 import random
 import re
-from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
 from google import genai
 
@@ -23,6 +22,7 @@ THEMEN = [
     "Civic Design",
     "Smart City Service Design"
 ]
+
 SPRACH_MAPPING = {
     "de": {"ort": "Deutschland", "formate": ["Konferenz", "Workshop", "Meet-up", "Vortrag"]},
     "en": {"ort": "Europe", "formate": ["Conference", "Workshop", "Summit", "Talk"]}
@@ -31,46 +31,34 @@ SPRACH_MAPPING = {
 SEED_URLS = [
     "https://www.service-design-network.org/events",
     "https://uxpa.org/calendar/",
-    "https://www.servicedesignglobalconference.com/",
-    "https://uxconf.de/"
+    "https://uxconf.de/",
+    "https://digitale-leute.de/summit/"
 ]
 
 DATABASE_FILE = "data.json"
 ICS_FILE = "events.ics"
 TARGET_MODEL = "models/gemini-2.5-flash"
-CLEANUP_DAYS = 14  # Wie lange ein 'on_hold' Event ohne Update überlebt
 
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
 def load_db():
     if os.path.exists(DATABASE_FILE):
-        try:
-            with open(DATABASE_FILE, "r", encoding="utf-8") as f:
-                db = json.load(f)
-                
-                # --- AUTO-CLEANUP & VALIDATION ---
-                now = time.time()
-                clean_events = {}
-                cutoff = now - (CLEANUP_DAYS * 86400)
-                
-                for k, v in db.get("events", {}).items():
-                    start_val = str(v.get("start", ""))
-                    # 1. Validiere Format (nur 8 Ziffern erlaubt)
-                    is_valid = bool(re.match(r"^\d{8}$", start_val))
-                    
-                    if not is_valid:
-                        v["status"] = "on_hold"
-                    
-                    # 2. Lösche alte 'on_hold' Einträge, die nie aktualisiert wurden
-                    added_at = v.get("added_at", now)
-                    if v["status"] == "on_hold" and added_at < cutoff:
-                        continue # Wird nicht in clean_events übernommen
-                        
-                    clean_events[k] = v
-                
-                db["events"] = clean_events
-                return db
-        except: pass
+        with open(DATABASE_FILE, "r", encoding="utf-8") as f:
+            db = json.load(f)
+            
+            # --- MIGRATION: Alte Einträge auf das neue Format umstellen ---
+            updated_events = {}
+            for k, v in db.get("events", {}).items():
+                # Sicherstellen, dass neue Felder existieren
+                if "source_link" not in v:
+                    v["source_link"] = v.get("link", "N/A")
+                if "event_format" not in v:
+                    v["event_format"] = v.get("type", "Event")
+                if "relevance" not in v:
+                    v["relevance"] = v.get("description", "No description provided.")
+                updated_events[k] = v
+            db["events"] = updated_events
+            return db
     return {"events": {}}
 
 def save_db(db):
@@ -79,14 +67,20 @@ def save_db(db):
 
 def extract_details_with_ai(text, source_url):
     prompt = (
-        f"Analyze for Design/UX events in 2026. SOURCE: {source_url}\n"
-        f"STRICT GEOGRAPHIC RULE: ONLY extract events located in EUROPE or ONLINE. "
-        f"Immediately IGNORE anything in USA, Canada, or Asia.\n\n"
-        f"DATE RULES:\n"
-        f"1. If a specific day or date range is found, set 'is_confirmed': true and 'start' as YYYYMMDD.\n"
-        f"2. Even if the text says '15-17 May', extract '20260515' as start.\n"
-        f"3. If ONLY the month is known, set 'is_confirmed': false.\n"
-        f"Output JSON list: [{{summary, start, end, is_confirmed, location, description}}]"
+        f"Analyze for Design/UX events in 2026. SOURCE URL: {source_url}\n"
+        f"STRICT GEOGRAPHIC RULE: ONLY extract events in EUROPE or ONLINE. No USA/Canada.\n"
+        f"STRICT DATA RULES:\n"
+        f"1. 'start' and 'end' MUST be YYYYMMDD.\n"
+        f"2. Each object MUST have these fields:\n"
+        f"   - 'summary': Name\n"
+        f"   - 'start': YYYYMMDD\n"
+        f"   - 'end': YYYYMMDD\n"
+        f"   - 'location': City or Online\n"
+        f"   - 'event_format': e.g. Conference, Workshop\n"
+        f"   - 'relevance': 1-2 sentences about content\n"
+        f"   - 'source_link': '{source_url}'\n"
+        f"3. If exact day is missing, use 1st day and set 'is_confirmed': false.\n"
+        f"Output JSON list: [{{summary, start, end, location, event_format, relevance, source_link, is_confirmed}}]"
     )
     try:
         response = client.models.generate_content(model=TARGET_MODEL, contents=prompt, config={'response_mime_type': 'application/json'})
@@ -105,55 +99,54 @@ def process_url(link, db):
         content = soup.get_text()[:6000]
         
         found_events = extract_details_with_ai(content, link)
-        
         for event in found_events:
-            start_str = str(event.get("start", ""))
-            
-            # Validierung: 8 Ziffern?
-            if re.match(r"^\d{8}$", start_str) and event.get("is_confirmed") is True:
-                # Ausschluss von Ganzjahres-Platzhaltern (01.01. - 31.12.)
-                if start_str.endswith("0101") and str(event.get("end", "")).endswith("1231"):
-                    event["status"] = "on_hold"
-                else:
-                    event["status"] = "active"
+            start = str(event.get("start", ""))
+            # Validierung & Status
+            if re.match(r"^\d{8}$", start) and event.get("is_confirmed") is True:
+                event["status"] = "active"
             else:
                 event["status"] = "on_hold"
-
-            uid = hashlib.md5((event.get("summary", "") + start_str).encode()).hexdigest()
             
-            # Metadaten hinzufügen
-            if uid not in db["events"]:
-                event["added_at"] = time.time()
-                
+            # Eindeutige ID generieren
+            uid = hashlib.md5((event.get("summary", "") + start).encode()).hexdigest()
             db["events"][uid] = event
-            print(f"    [{event['status'].upper()}] {event.get('summary')}")
+            print(f"    [{event['status']}] {event.get('summary')}")
         return True
     except:
         return False
 
 def generate_ics(db):
-    ics = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//DesignBot//DE", "X-WR-CALNAME:Design Events 2026", "METHOD:PUBLISH"]
+    ics = [
+        "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//DesignBot//DE", 
+        "X-WR-CALNAME:Design Events 2026", "METHOD:PUBLISH"
+    ]
+    
     count = 0
     for eid, e in db["events"].items():
-        # Doppelte Sicherheit beim Export
-        start = str(e.get("start", ""))
-        if e.get("status") == "active" and re.match(r"^\d{8}$", start):
-            desc = e.get('description', '').replace('\n', '\\n')
+        if e.get("status") == "active":
+            # Das neue Wunsch-Layout:
+            link = e.get("source_link", "N/A")
+            fmt = e.get("event_format", "Event")
+            desc = e.get("relevance", "No details.")
+            
+            full_description = f"Link: {link}\\nFormat: {fmt}\\nDescription: {desc}"
+            
             ics.extend([
                 "BEGIN:VEVENT",
                 f"UID:{eid}",
                 f"SUMMARY:{e['summary']}",
-                f"DTSTART;VALUE=DATE:{start}",
-                f"DTEND;VALUE=DATE:{e.get('end', start)}",
+                f"DTSTART;VALUE=DATE:{e['start']}",
+                f"DTEND;VALUE=DATE:{e.get('end', e['start'])}",
                 f"LOCATION:{e.get('location', 'TBA')}",
-                f"DESCRIPTION:{desc}",
+                f"DESCRIPTION:{full_description}",
                 "END:VEVENT"
             ])
             count += 1
+            
     ics.append("END:VCALENDAR")
     with open(ICS_FILE, "w", encoding="utf-8") as f:
         f.write("\n".join(ics))
-    print(f"\n>>> ICS generiert: {count} bestätigte Events.")
+    print(f"\n>>> ICS bereit mit {count} Events.")
 
 def main():
     db = load_db()
@@ -163,13 +156,11 @@ def main():
     lang = random.choice(list(SPRACH_MAPPING.keys()))
     conf = SPRACH_MAPPING[lang]
     for thema in THEMEN:
-        # Wir fügen Ausschlusskriterien direkt in die Google-Suche ein
-        query = f"{thema} {conf['formate'][0]} {conf['ort']} 2026 -USA -America -Canada"
-        print(f"--- Suche (Fokus Europa): {query} ---")
+        query = f"{thema} {conf['formate'][0]} {conf['ort']} 2026 -USA -America"
         try:
             r = requests.post("https://google.serper.dev/search", 
                               headers={'X-API-KEY': os.getenv("SERPER_API_KEY")}, 
-                              json={"q": query, "num": 10}).json() # Erhöht auf 10 für mehr Auswahl
+                              json={"q": query, "num": 5}).json()
             for item in r.get('organic', []):
                 process_url(item['link'], db)
                 save_db(db)
