@@ -868,14 +868,6 @@ LOCATION:Heathrow
 DESCRIPTION:LGPN South is the sister event to LGPN North. The event brings together private sector industry leaders with high-level Local Government stakeholders from across the South of England.
 END:VEVENT
 BEGIN:VEVENT
-UID:b800f3698f499f573aab20ef87b5cfb7
-SUMMARY:PublicTechnology Live
-DTSTART;VALUE=DATE:TBA
-DTEND;VALUE=DATE:TBA
-LOCATION:London
-DESCRIPTION:PublicTechnology Live gathers industry leaders and public sector pioneers to examine the opportunities and risks in the era of rapid technological change. Hear from the best in digital and data, plus meet the people who can help make change happen.
-END:VEVENT
-BEGIN:VEVENT
 UID:e773a956b166e33e5e8e695454d38e01
 SUMMARY:Service Design Conference Europe 2026 (Conference and Exhibits)
 DTSTART;VALUE=DATE:20260608
