@@ -8,9 +8,13 @@ import re
 from bs4 import BeautifulSoup
 from google import genai
 
-# --- CONFIG ---
+# --- KONFIGURATION ---
 THEMEN = [
     "Service Design Government", 
+    "UX Public Sector Europe", 
+    "GovTech Conference 2026", 
+    "Digital Accessibility Public Sector",
+    "Civic Design Innovation Europe"
     "Service Design",
     "UX Design",
     "User Experience Design",
@@ -23,11 +27,7 @@ THEMEN = [
     "Smart City Service Design"
 ]
 
-SPRACH_MAPPING = {
-    "de": {"ort": "Deutschland", "formate": ["Konferenz", "Workshop", "Meet-up", "Vortrag"]},
-    "en": {"ort": "Europe", "formate": ["Conference", "Workshop", "Summit", "Talk"]}
-}
-
+# Deine festen Quellen
 SEED_URLS = [
     "https://www.service-design-network.org/events",
     "https://uxpa.org/calendar/",
@@ -37,50 +37,26 @@ SEED_URLS = [
 
 DATABASE_FILE = "data.json"
 ICS_FILE = "events.ics"
-TARGET_MODEL = "models/gemini-2.5-flash"
+TARGET_MODEL = "models/gemini-1.5-flash"
 
-client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+# API Keys aus den GitHub Secrets
+SERPER_KEY = os.getenv("SERPER_API_KEY")
+GEMINI_KEY = os.getenv("GEMINI_API_KEY")
+
+client = genai.Client(api_key=GEMINI_KEY)
 
 def load_db():
     if os.path.exists(DATABASE_FILE):
         with open(DATABASE_FILE, "r", encoding="utf-8") as f:
-            db = json.load(f)
-            
-            # --- MIGRATION: Alte Einträge auf das neue Format umstellen ---
-            updated_events = {}
-            for k, v in db.get("events", {}).items():
-                # Sicherstellen, dass neue Felder existieren
-                if "source_link" not in v:
-                    v["source_link"] = v.get("link", "N/A")
-                if "event_format" not in v:
-                    v["event_format"] = v.get("type", "Event")
-                if "relevance" not in v:
-                    v["relevance"] = v.get("description", "No description provided.")
-                updated_events[k] = v
-            db["events"] = updated_events
-            return db
+            return json.load(f)
     return {"events": {}}
 
-def save_db(db):
-    with open(DATABASE_FILE, "w", encoding="utf-8") as f:
-        json.dump(db, f, indent=2, ensure_ascii=False)
-
-def extract_details_with_ai(text, source_url):
+def extract_details_with_ai(text):
     prompt = (
-        f"Analyze for Design/UX events in 2026. SOURCE URL: {source_url}\n"
-        f"STRICT GEOGRAPHIC RULE: ONLY extract events in EUROPE or ONLINE. No USA/Canada.\n"
-        f"STRICT DATA RULES:\n"
-        f"1. 'start' and 'end' MUST be YYYYMMDD.\n"
-        f"2. Each object MUST have these fields:\n"
-        f"   - 'summary': Name\n"
-        f"   - 'start': YYYYMMDD\n"
-        f"   - 'end': YYYYMMDD\n"
-        f"   - 'location': City or Online\n"
-        f"   - 'event_format': e.g. Conference, Workshop\n"
-        f"   - 'relevance': 1-2 sentences about content\n"
-        f"   - 'source_link': '{source_url}'\n"
-        f"3. If exact day is missing, use 1st day and set 'is_confirmed': false.\n"
-        f"Output JSON list: [{{summary, start, end, location, event_format, relevance, source_link, is_confirmed}}]"
+        "Extract professional Design/UX events for 2026 in Europe from the text. "
+        "Return a JSON list: [{\"summary\": \"...\", \"start\": \"YYYYMMDD\", \"end\": \"YYYYMMDD\", "
+        "\"location\": \"...\", \"type\": \"...\", \"relevance\": \"...\", \"is_confirmed\": true/false}]. "
+        "Use YYYYMMDD for dates. Text: " + text
     )
     try:
         response = client.models.generate_content(model=TARGET_MODEL, contents=prompt, config={'response_mime_type': 'application/json'})
@@ -90,81 +66,100 @@ def extract_details_with_ai(text, source_url):
         return []
 
 def process_url(link, db):
+    # Dubletten-Check: Wenn der Link für ein aktives Event schon da ist, überspringen
+    if any(e.get("source_link") == link and e.get("status") == "active" for e in db["events"].values()):
+        return False
+
     print(f"  * Scrape: {link}")
     try:
         headers = {'User-Agent': 'Mozilla/5.0'}
         response = requests.get(link, headers=headers, timeout=15)
         soup = BeautifulSoup(response.text, 'html.parser')
-        for s in soup(["script", "style", "nav", "footer", "header"]): s.decompose()
+        for s in soup(["script", "style", "nav", "footer"]): s.decompose()
         content = soup.get_text()[:6000]
         
-        found_events = extract_details_with_ai(content, link)
+        found_events = extract_details_with_ai(content)
+        
         for event in found_events:
             start = str(event.get("start", ""))
-            # Validierung & Status
+            
+            # Link-Zuweisung durch Python (sicherer als KI)
+            event["source_link"] = link
+            
+            # Status festlegen
             if re.match(r"^\d{8}$", start) and event.get("is_confirmed") is True:
                 event["status"] = "active"
             else:
                 event["status"] = "on_hold"
-            
-            # Eindeutige ID generieren
+
             uid = hashlib.md5((event.get("summary", "") + start).encode()).hexdigest()
             db["events"][uid] = event
-            print(f"    [{event['status']}] {event.get('summary')}")
+            print(f"    [{event['status'].upper()}] {event.get('summary')}")
         return True
     except:
         return False
 
+def run_serper_search(query):
+    """Sucht bei Google nach neuen Event-Links."""
+    print(f"🔍 Suche nach: {query}")
+    try:
+        url = "https://google.serper.dev/search"
+        payload = json.dumps({"q": query, "num": 5})
+        headers = {'X-API-KEY': SERPER_KEY, 'Content-Type': 'application/json'}
+        response = requests.request("POST", url, headers=headers, data=payload)
+        return [item['link'] for item in response.json().get('organic', [])]
+    except Exception as e:
+        print(f"⚠️ Serper Fehler: {e}")
+        return []
+
 def generate_ics(db):
-    ics = [
-        "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//DesignBot//DE", 
-        "X-WR-CALNAME:Design Events 2026", "METHOD:PUBLISH"
-    ]
-    
+    ics = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//DesignBot//DE", "X-WR-CALNAME:Design Events 2026", "METHOD:PUBLISH"]
     count = 0
-    for eid, e in db["events"].items():
+    for e in db["events"].values():
         if e.get("status") == "active":
-            # Das neue Wunsch-Layout:
             link = e.get("source_link", "N/A")
-            fmt = e.get("event_format", "Event")
-            desc = e.get("relevance", "No details.")
+            fmt = e.get("type", "Event")
+            desc = e.get("relevance", "N/A")
             
-            full_description = f"Link: {link}\\nFormat: {fmt}\\nDescription: {desc}"
+            full_desc = f"Link: {link}\\nFormat: {fmt}\\nDescription: {desc}"
             
             ics.extend([
                 "BEGIN:VEVENT",
-                f"UID:{eid}",
                 f"SUMMARY:{e['summary']}",
                 f"DTSTART;VALUE=DATE:{e['start']}",
                 f"DTEND;VALUE=DATE:{e.get('end', e['start'])}",
                 f"LOCATION:{e.get('location', 'TBA')}",
-                f"DESCRIPTION:{full_description}",
+                f"DESCRIPTION:{full_desc}",
                 "END:VEVENT"
             ])
             count += 1
-            
     ics.append("END:VCALENDAR")
     with open(ICS_FILE, "w", encoding="utf-8") as f:
         f.write("\n".join(ics))
-    print(f"\n>>> ICS bereit mit {count} Events.")
+    print(f"\n>>> ICS bereit mit {count} bestätigten Events.")
 
 def main():
     db = load_db()
-    for url in SEED_URLS: process_url(url, db)
-    save_db(db)
+    
+    # 1. Bekannte Quellen prüfen
+    print(">>> Prüfe Seeds...")
+    for url in SEED_URLS:
+        process_url(url, db)
+    
+    # 2. Über Serper neue Quellen finden (Rotation: 2 Themen pro Run)
+    selected_themes = random.sample(THEMEN, 2)
+    print(f"\n>>> Starte Recherche für: {selected_themes}")
+    for thema in selected_themes:
+        new_links = run_serper_search(thema)
+        for link in new_links:
+            process_url(link, db)
+            # Kleiner Sleep um APIs zu schonen
+            time.sleep(1)
 
-    lang = random.choice(list(SPRACH_MAPPING.keys()))
-    conf = SPRACH_MAPPING[lang]
-    for thema in THEMEN:
-        query = f"{thema} {conf['formate'][0]} {conf['ort']} 2026 -USA -America"
-        try:
-            r = requests.post("https://google.serper.dev/search", 
-                              headers={'X-API-KEY': os.getenv("SERPER_API_KEY")}, 
-                              json={"q": query, "num": 5}).json()
-            for item in r.get('organic', []):
-                process_url(item['link'], db)
-                save_db(db)
-        except: continue
+    # 3. Speichern
+    with open(DATABASE_FILE, "w", encoding="utf-8") as f:
+        json.dump(db, f, indent=2, ensure_ascii=False)
+    
     generate_ics(db)
 
 if __name__ == "__main__":
