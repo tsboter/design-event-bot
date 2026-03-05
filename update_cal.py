@@ -67,12 +67,13 @@ def save_db(db):
 
 def extract_details_with_ai(text, source_url):
     prompt = (
-        f"Analyze for Design/UX events in 2026. "
-        f"STRICT DATE RULES:\n"
-        f"1. 'start' and 'end' MUST be YYYYMMDD strings (e.g. 20261015). NEVER use 'TBA'.\n"
-        f"2. If the EXACT DAY is found: set 'is_confirmed': true.\n"
-        f"3. If ONLY THE MONTH is known: use YYYYMM01 and set 'is_confirmed': false.\n"
-        f"4. Description structure: Link: {source_url}\\nFormat: [Typ]\\nInhalt: [Relevanz].\n"
+        f"Analyze for Design/UX events in 2026. SOURCE: {source_url}\n"
+        f"STRICT GEOGRAPHIC RULE: ONLY extract events located in EUROPE or ONLINE. "
+        f"Immediately IGNORE anything in USA, Canada, or Asia.\n\n"
+        f"DATE RULES:\n"
+        f"1. If a specific day or date range is found, set 'is_confirmed': true and 'start' as YYYYMMDD.\n"
+        f"2. Even if the text says '15-17 May', extract '20260515' as start.\n"
+        f"3. If ONLY the month is known, set 'is_confirmed': false.\n"
         f"Output JSON list: [{{summary, start, end, is_confirmed, location, description}}]"
     )
     try:
@@ -147,15 +148,16 @@ def main():
     for url in SEED_URLS: process_url(url, db)
     save_db(db)
 
-    # Sprache rotieren
     lang = random.choice(list(SPRACH_MAPPING.keys()))
     conf = SPRACH_MAPPING[lang]
     for thema in THEMEN:
-        query = f"{thema} {conf['formate'][0]} {conf['ort']} 2026"
+        # Wir fügen Ausschlusskriterien direkt in die Google-Suche ein
+        query = f"{thema} {conf['formate'][0]} {conf['ort']} 2026 -USA -America -Canada"
+        print(f"--- Suche (Fokus Europa): {query} ---")
         try:
             r = requests.post("https://google.serper.dev/search", 
                               headers={'X-API-KEY': os.getenv("SERPER_API_KEY")}, 
-                              json={"q": query, "num": 5}).json()
+                              json={"q": query, "num": 10}).json() # Erhöht auf 10 für mehr Auswahl
             for item in r.get('organic', []):
                 process_url(item['link'], db)
                 save_db(db)
