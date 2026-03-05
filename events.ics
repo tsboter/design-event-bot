@@ -9,7 +9,7 @@ SUMMARY:SDN Global Conference
 DTSTART;VALUE=DATE:20260923
 DTEND;VALUE=DATE:20260925
 LOCATION:London, UK
-DESCRIPTION:The annual global conference for service design professionals, bringing together practitioners, academics, and industry leaders from across Europe.
+DESCRIPTION:Link: N/A\nFormat: Event\nDescription: The annual global conference for service design professionals, bringing together practitioners, academics, and industry leaders from across Europe.
 END:VEVENT
 BEGIN:VEVENT
 UID:6aa0c19ddb6330c4927449091859ae1b
@@ -17,7 +17,7 @@ SUMMARY:Service Design Masterclass
 DTSTART;VALUE=DATE:20260610
 DTEND;VALUE=DATE:20260610
 LOCATION:Online
-DESCRIPTION:An intensive online masterclass on advanced service design methodologies, accessible globally.
+DESCRIPTION:Link: N/A\nFormat: Event\nDescription: An intensive online masterclass on advanced service design methodologies, accessible globally.
 END:VEVENT
 BEGIN:VEVENT
 UID:62fea9fadfe97ad51d67dc918675cb41
@@ -25,6 +25,6 @@ SUMMARY:Virtual Service Design Workshop
 DTSTART;VALUE=DATE:20261112
 DTEND;VALUE=DATE:20261114
 LOCATION:Online
-DESCRIPTION:An interactive workshop focusing on remote collaboration and digital tools in service design, available worldwide.
+DESCRIPTION:Link: N/A\nFormat: Event\nDescription: An interactive workshop focusing on remote collaboration and digital tools in service design, available worldwide.
 END:VEVENT
 END:VCALENDAR
