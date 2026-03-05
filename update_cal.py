@@ -8,7 +8,7 @@ import re
 from bs4 import BeautifulSoup
 from google import genai
 
-# --- KONFIGURATION ---
+# --- CONFIG ---
 THEMEN = ["Service Design", "UX Design", "Public Sector Innovation", "Strategic Design"]
 SPRACH_MAPPING = {
     "de": {"ort": "Deutschland", "formate": ["Konferenz", "Workshop", "Meet-up"]},
@@ -31,30 +31,32 @@ client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 def load_db():
     if os.path.exists(DATABASE_FILE):
         with open(DATABASE_FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
+            db = json.load(f)
+            # BEREINIGUNG: Wir fixen alte "TBA" Einträge direkt beim Laden
+            clean_events = {}
+            for k, v in db.get("events", {}).items():
+                start = str(v.get("start", ""))
+                # Wenn das Datum keine 8 Zahlen sind, setzen wir es auf on_hold
+                if not re.match(r"^\d{8}$", start):
+                    v["status"] = "on_hold"
+                clean_events[k] = v
+            db["events"] = clean_events
+            return db
     return {"events": {}}
 
 def save_db(db):
     with open(DATABASE_FILE, "w", encoding="utf-8") as f:
         json.dump(db, f, indent=2, ensure_ascii=False)
 
-def clean_string(text):
-    return re.sub(r'[^a-z0-9]', '', text.lower())
-
 def extract_details_with_ai(text, source_url):
-    """Extrahiert Events und markiert vage Daten als Platzhalter."""
     prompt = (
-        f"Analyze the text for professional Design/UX events in 2026. "
-        f"RULES:\n"
-        f"1. If a SPECIFIC DAY is found, provide it (YYYYMMDD) and set 'is_confirmed_date': true.\n"
-        f"2. If ONLY A MONTH is found, use the 1st (YYYYMM01) and set 'is_confirmed_date': false.\n"
-        f"3. If only '2026' is found without a month, ignore the event.\n"
-        f"4. Format 'description' field:\n"
-        f"Link: {source_url}\n"
-        f"Format: [Typ]\n"
-        f"Inhalt/Relevanz: [Max 2 Sätze]\n"
-        f"5. Output as JSON list: [{{summary, start(YYYYMMDD), end(YYYYMMDD), is_confirmed_date, location, type, description}}].\n"
-        f"Text: {text}"
+        f"Analyze for Design/UX events in 2026. "
+        f"STRICT DATE RULES:\n"
+        f"1. 'start' and 'end' MUST be YYYYMMDD (e.g. 20261015). NEVER use 'TBA' or strings.\n"
+        f"2. If the EXACT DAY is known: set 'is_confirmed': true.\n"
+        f"3. If ONLY the MONTH is known: use YYYYMM01 and set 'is_confirmed': false.\n"
+        f"4. Description format: Link: {source_url}\\nFormat: [Typ]\\nInhalt: [Relevanz].\n"
+        f"Output JSON list: [{{summary, start, end, is_confirmed, location, description}}]"
     )
     try:
         response = client.models.generate_content(model=TARGET_MODEL, contents=prompt, config={'response_mime_type': 'application/json'})
@@ -64,10 +66,6 @@ def extract_details_with_ai(text, source_url):
         return []
 
 def process_url(link, db):
-    link_id = hashlib.md5(link.encode()).hexdigest()
-    # Wir lassen die Prüfung auf existierende Links hier zu, 
-    # damit wir on_hold Events später updaten können, falls wir sie erneut scrapen.
-    
     print(f"  * Analysiere: {link}")
     try:
         headers = {'User-Agent': 'Mozilla/5.0'}
@@ -76,43 +74,40 @@ def process_url(link, db):
         for s in soup(["script", "style", "nav", "footer", "header"]): s.decompose()
         content = soup.get_text()[:6000]
         
-        time.sleep(2)
         found_events = extract_details_with_ai(content, link)
         
         for event in found_events:
-            if not event or not event.get("start"): continue
+            start = str(event.get("start", ""))
             
-            # Status-Logik: Nur Events mit bestätigtem Tag sind "active"
-            if event.get("is_confirmed_date") is True:
+            # --- DIE NEUE SICHERHEITSSCHLEUSE ---
+            # Prüfe ob Startdatum exakt 8 Ziffern sind
+            is_valid_date = re.match(r"^\d{8}$", start)
+            
+            if is_valid_date and event.get("is_confirmed") is True:
                 event["status"] = "active"
             else:
                 event["status"] = "on_hold"
-                print(f"    ⏳ Warteschlange (kein Tag): {event['summary']}")
-
-            uid = hashlib.md5((event["summary"] + event["start"]).encode()).hexdigest()
             
-            # Falls das Event schon existiert, aber jetzt ein "active" Datum hat -> Updaten
-            if uid in db["events"] and db["events"][uid]["status"] == "active":
-                continue
-                
+            # Verhindere Ganzjahres-Events (01.01. bis 31.12.)
+            if start.endswith("0101") and str(event.get("end", "")).endswith("1231"):
+                event["status"] = "on_hold"
+
+            uid = hashlib.md5((event.get("summary", "") + start).encode()).hexdigest()
             db["events"][uid] = event
-            if event["status"] == "active":
-                print(f"    ✅ AKTIV: {event['summary']} ({event['start']})")
+            
+            status_emoji = "✅" if event["status"] == "active" else "⏳"
+            print(f"    {status_emoji} {event.get('summary')} [{event['status']}]")
         return True
-    except:
+    except Exception as e:
+        print(f"    ❌ Fehler: {e}")
         return False
 
 def generate_ics(db):
-    """Erstellt die ICS-Datei NUR aus aktiven Events."""
-    ics = [
-        "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//DesignBot//DE", 
-        "X-WR-CALNAME:Design Events 2026", "METHOD:PUBLISH"
-    ]
-    
+    ics = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//DesignBot//DE", "X-WR-CALNAME:Design Events 2026", "METHOD:PUBLISH"]
     active_count = 0
     for eid, e in db["events"].items():
-        # FILTER: Nur Events mit konkretem Tag landen im Kalender
-        if e.get("status") == "active":
+        # Nur Einträge mit Status 'active' UND gültigem 8-stelligem Datum
+        if e.get("status") == "active" and re.match(r"^\d{8}$", str(e.get("start", ""))):
             desc = e.get('description', '').replace('\n', '\\n')
             ics.extend([
                 "BEGIN:VEVENT",
@@ -125,32 +120,28 @@ def generate_ics(db):
                 "END:VEVENT"
             ])
             active_count += 1
-            
     ics.append("END:VCALENDAR")
     with open(ICS_FILE, "w", encoding="utf-8") as f:
         f.write("\n".join(ics))
-    print(f">>> ICS erstellt mit {active_count} bestätigten Terminen.")
+    print(f"\n>>> ICS generiert: {active_count} bestätigte Events.")
 
 def main():
     db = load_db()
-    
-    # 1. Seeds
     for url in SEED_URLS: process_url(url, db)
     save_db(db)
 
-    # 2. Suche
-    for lang, conf in SPRACH_MAPPING.items():
-        for thema in THEMEN:
-            query = f"{thema} {conf['formate'][0]} {conf['ort']} 2026"
-            try:
-                r = requests.post("https://google.serper.dev/search", 
-                                  headers={'X-API-KEY': os.getenv("SERPER_API_KEY")}, 
-                                  json={"q": query, "num": 5}).json()
-                for item in r.get('organic', []):
-                    process_url(item['link'], db)
-                    save_db(db)
-            except: continue
-
+    lang = random.choice(list(SPRACH_MAPPING.keys()))
+    conf = SPRACH_MAPPING[lang]
+    for thema in THEMEN:
+        query = f"{thema} {conf['formate'][0]} {conf['ort']} 2026"
+        try:
+            r = requests.post("https://google.serper.dev/search", 
+                              headers={'X-API-KEY': os.getenv("SERPER_API_KEY")}, 
+                              json={"q": query, "num": 5}).json()
+            for item in r.get('organic', []):
+                process_url(item['link'], db)
+                save_db(db)
+        except: continue
     generate_ics(db)
 
 if __name__ == "__main__":
