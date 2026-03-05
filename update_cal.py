@@ -10,7 +10,19 @@ from bs4 import BeautifulSoup
 from google import genai
 
 # --- CONFIG ---
-THEMEN = ["Service Design", "UX Design", "Public Sector Innovation", "Strategic Design"]
+THEMEN = [
+    "Service Design Government", 
+    "Service Design",
+    "UX Design",
+    "User Experience Design",
+    "UX/UI Design",
+    "UX Public Sector", 
+    "GovTech Innovation", 
+    "Digital Accessibility Conference",
+    "E-Government User Experience",
+    "Civic Design",
+    "Smart City Service Design"
+]
 SPRACH_MAPPING = {
     "de": {"ort": "Deutschland", "formate": ["Konferenz", "Workshop", "Meet-up", "Vortrag"]},
     "en": {"ort": "Europe", "formate": ["Conference", "Workshop", "Summit", "Talk"]}
