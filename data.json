@@ -1109,6 +1109,236 @@
       "description": "A series of workshops held as part of the Service Design Conference Europe 2026, providing a hands-on, transformative experience following the main conference. These workshops will delve deeper into topics such as Service Design, Design strategies, enterprise architecture, business transformation, and technology innovation, aiming to provide actionable insights for attendees to drive real-world impact.",
       "link": "https://irmuk.co.uk/sd-conference-2026/",
       "status": "active"
+    },
+    "d4b12e0883dea9fbb55cf33364373f7f": {
+      "summary": "Service Design Day 2026",
+      "start": "20260529",
+      "end": "20260529",
+      "location": "National Library of Estonia",
+      "type": "Conference",
+      "description": "Link: https://www.servicedesignday.ee/\nFormat: Conference\nInhalt bzw. Relevanz: It is a day dedicated to service design enthusiasts—a worldwide event that brings together people from various backgrounds and disciplines. Together, we will celebrate service design, raise awareness, and create impact in the world around us.",
+      "link": "https://www.servicedesignday.ee/",
+      "status": "active"
+    },
+    "8b157364d758771968729059549e7f02": {
+      "summary": "Industry experts break down what’s actually happening in product management.",
+      "start": "20260224",
+      "end": "20260224",
+      "location": "London",
+      "type": "Product Conference",
+      "description": "Link: https://www.userinterviews.com/blog/ux-research-ops-conferences-events\nFormat: Product Conference\nInhalt bzw. Relevanz: Industry experts break down what’s actually happening in product management. This free in-person event helps attendees stay sharp without cost.",
+      "link": "https://www.userinterviews.com/blog/ux-research-ops-conferences-events",
+      "status": "active"
+    },
+    "606ca52f4d12d0fe5a7692b2705c4467": {
+      "summary": "Industry experts break down what’s actually happening in product management.",
+      "start": "20260520",
+      "end": "20260520",
+      "location": "New York",
+      "type": "Product Conference",
+      "description": "Link: https://www.userinterviews.com/blog/ux-research-ops-conferences-events\nFormat: Product Conference\nInhalt bzw. Relevanz: Industry experts break down what’s actually happening in product management. This free in-person event helps attendees stay sharp without cost.",
+      "link": "https://www.userinterviews.com/blog/ux-research-ops-conferences-events",
+      "status": "active"
+    },
+    "627d6be516e920b2b4643c656b7e2e1e": {
+      "summary": "AI-focused online edition of ProductCon.",
+      "start": "20260805",
+      "end": "20260805",
+      "location": "Virtual",
+      "type": "Product Conference (Online/AI-focused)",
+      "description": "Link: https://www.userinterviews.com/blog/ux-research-ops-conferences-events\nFormat: Product Conference (Online/AI-focused)\nInhalt bzw. Relevanz: Industry experts break down what’s actually happening in product management, focusing on AI. This free online event helps attendees stay sharp without cost.",
+      "link": "https://www.userinterviews.com/blog/ux-research-ops-conferences-events",
+      "status": "active"
+    },
+    "e2a8153b4f683e0be2daff7c548c872d": {
+      "summary": "Industry experts break down what’s actually happening in product management.",
+      "start": "20261001",
+      "end": "20261001",
+      "location": "San Francisco",
+      "type": "Product Conference",
+      "description": "Link: https://www.userinterviews.com/blog/ux-research-ops-conferences-events\nFormat: Product Conference\nInhalt bzw. Relevanz: Industry experts break down what’s actually happening in product management. This free in-person event helps attendees stay sharp without cost.",
+      "link": "https://www.userinterviews.com/blog/ux-research-ops-conferences-events",
+      "status": "active"
+    },
+    "ea691d7edf774df63a7b5e4cfe616239": {
+      "summary": "2,500+ brands share playbooks on using AI and experience management to reduce churn, save millions, and turn customer feedback into real business impact.",
+      "start": "20260317",
+      "end": "20260319",
+      "location": "Seattle",
+      "type": "Experience Management Conference",
+      "description": "Link: https://www.userinterviews.com/blog/ux-research-ops-conferences-events\nFormat: Experience Management Conference\nInhalt bzw. Relevanz: Brands share playbooks on using AI and experience management for business impact. Attendees can learn to reduce churn and save millions.",
+      "link": "https://www.userinterviews.com/blog/ux-research-ops-conferences-events",
+      "status": "active"
+    },
+    "0a73c96f5875a481569312ab7a1bf8cc": {
+      "summary": "Pendo brings software leaders together to share strategies for building better products and figuring out career paths.",
+      "start": "20260324",
+      "end": "20260326",
+      "location": "Raleigh, North Carolina",
+      "type": "Product Conference",
+      "description": "Link: https://www.userinterviews.com/blog/ux-research-ops-conferences-events\nFormat: Product Conference\nInhalt bzw. Relevanz: Software leaders share strategies for building better products. The event also focuses on figuring out career paths for attendees.",
+      "link": "https://www.userinterviews.com/blog/ux-research-ops-conferences-events",
+      "status": "active"
+    },
+    "6a31b478686fc05ad024296a508ae010": {
+      "summary": "Brings together product, UX, design, and dev to work across silos.",
+      "start": "20260511",
+      "end": "20260513",
+      "location": "New York",
+      "type": "Product/UX/Design/Dev Conference",
+      "description": "Link: https://www.userinterviews.com/blog/ux-research-ops-conferences-events\nFormat: Product/UX/Design/Dev Conference\nInhalt bzw. Relevanz: This conference brings together various disciplines to work across silos. It includes workshops and executive networking for in-person experience.",
+      "link": "https://www.userinterviews.com/blog/ux-research-ops-conferences-events",
+      "status": "active"
+    },
+    "cc3cee1a6cf6310ddb6ea3780fc06c8c": {
+      "summary": "Brings together product, UX, design, and dev to work across silos.",
+      "start": "20260527",
+      "end": "20260529",
+      "location": "Berlin",
+      "type": "Product/UX/Design/Dev Conference",
+      "description": "Link: https://www.userinterviews.com/blog/ux-research-ops-conferences-events\nFormat: Product/UX/Design/Dev Conference\nInhalt bzw. Relevanz: This conference brings together various disciplines to work across silos. It includes workshops and executive networking for in-person experience.",
+      "link": "https://www.userinterviews.com/blog/ux-research-ops-conferences-events",
+      "status": "active"
+    },
+    "68fd9c42733f00eb5a26b36080404527": {
+      "summary": "8,000+ designers, developers, and product leaders connect to hear from product builders, explore design and development trends, and collaborate across disciplines.",
+      "start": "20260623",
+      "end": "20260625",
+      "location": "San Francisco",
+      "type": "Design/Dev/Product Conference",
+      "description": "Link: https://www.userinterviews.com/blog/ux-research-ops-conferences-events\nFormat: Design/Dev/Product Conference\nInhalt bzw. Relevanz: Designers, developers, and product leaders connect to explore design and development trends. It offers hands-on sessions and real takeaways for practitioners.",
+      "link": "https://www.userinterviews.com/blog/ux-research-ops-conferences-events",
+      "status": "active"
+    },
+    "0b166496b61964b89af405ee85cd47b7": {
+      "summary": "A full-day conference for product people across Europe, with a single-track lineup of keynotes and talks.",
+      "start": "20260626",
+      "end": "20260626",
+      "location": "Hamburg, Germany",
+      "type": "Product Conference",
+      "description": "Link: https://www.userinterviews.com/blog/ux-research-ops-conferences-events\nFormat: Product Conference\nInhalt bzw. Relevanz: A single-track full-day conference for product people across Europe. Attendees experience curated keynotes and talks together, fostering connection.",
+      "link": "https://www.userinterviews.com/blog/ux-research-ops-conferences-events",
+      "status": "active"
+    },
+    "486803a2312e2d6ab7626679e5b19a56": {
+      "summary": "A hybrid conference tackling leading through complexity, building AI products, and balancing growth and profitability.",
+      "start": "20261016",
+      "end": "20261016",
+      "location": "Munich and online",
+      "type": "Product Conference (Hybrid)",
+      "description": "Link: https://www.userinterviews.com/blog/ux-research-ops-conferences-events\nFormat: Product Conference (Hybrid)\nInhalt bzw. Relevanz: This hybrid conference tackles leading through complexity and building valuable AI products. It focuses on finding balance between growth and profitability for sustainable wins.",
+      "link": "https://www.userinterviews.com/blog/ux-research-ops-conferences-events",
+      "status": "active"
+    },
+    "2f41b80ffa7c56e6b1ce1667e9575735": {
+      "summary": "Brings designers and front-end developers together to dig into design systems, accessibility, CSS, and cutting-edge web techniques.",
+      "start": "20260413",
+      "end": "20260416",
+      "location": "Amsterdam",
+      "type": "Design/Front-end Developer Conference",
+      "description": "Link: https://www.userinterviews.com/blog/ux-research-ops-conferences-events\nFormat: Design/Front-end Developer Conference\nInhalt bzw. Relevanz: Designers and front-end developers explore design systems, accessibility, CSS, and cutting-edge web techniques. The focus is on building better web experiences.",
+      "link": "https://www.userinterviews.com/blog/ux-research-ops-conferences-events",
+      "status": "active"
+    },
+    "23c9a17a2b3e27fca0d651bd93d2aad7": {
+      "summary": "Brings designers and front-end developers together to dig into design systems, accessibility, CSS, and cutting-edge web techniques.",
+      "start": "20260907",
+      "end": "20260910",
+      "location": "Freiburg, Germany",
+      "type": "Design/Front-end Developer Conference",
+      "description": "Link: https://www.userinterviews.com/blog/ux-research-ops-conferences-events\nFormat: Design/Front-end Developer Conference\nInhalt bzw. Relevanz: Designers and front-end developers explore design systems, accessibility, CSS, and cutting-edge web techniques. The focus is on building better web experiences.",
+      "link": "https://www.userinterviews.com/blog/ux-research-ops-conferences-events",
+      "status": "active"
+    },
+    "84b839cbafd0835205604970f26668fc": {
+      "summary": "Brings designers and front-end developers together to dig into design systems, accessibility, CSS, and cutting-edge web techniques.",
+      "start": "20261012",
+      "end": "20261015",
+      "location": "Antwerp, Belgium",
+      "type": "Design/Front-end Developer Conference",
+      "description": "Link: https://www.userinterviews.com/blog/ux-research-ops-conferences-events\nFormat: Design/Front-end Developer Conference\nInhalt bzw. Relevanz: Designers and front-end developers explore design systems, accessibility, CSS, and cutting-edge web techniques. The focus is on building better web experiences.",
+      "link": "https://www.userinterviews.com/blog/ux-research-ops-conferences-events",
+      "status": "active"
+    },
+    "655d8831e9038cdfa8e0bb77df362daf": {
+      "summary": "Europe’s leading UX festival with hand-picked speakers, hands-on workshops, and community.",
+      "start": "20260415",
+      "end": "20260416",
+      "location": "Aarhus, Denmark and online",
+      "type": "UX Festival/Conference (Hybrid)",
+      "description": "Link: https://www.userinterviews.com/blog/ux-research-ops-conferences-events\nFormat: UX Festival/Conference (Hybrid)\nInhalt bzw. Relevanz: Europe’s leading UX festival offers hand-picked speakers and hands-on workshops. It fosters a community that encourages rethinking design approaches.",
+      "link": "https://www.userinterviews.com/blog/ux-research-ops-conferences-events",
+      "status": "active"
+    },
+    "16f215ee8c36745dbec8e92ffca2b685": {
+      "summary": "An invitation-only gathering for senior designers across Europe to learn from the best and connect with peers.",
+      "start": "20260916",
+      "end": "20260918",
+      "location": "Berlin and online",
+      "type": "Senior Design Leadership Gathering (Invitation-only)",
+      "description": "Link: https://www.userinterviews.com/blog/ux-research-ops-conferences-events\nFormat: Senior Design Leadership Gathering (Invitation-only)\nInhalt bzw. Relevanz: An invitation-only gathering for senior designers to learn from experts and connect with peers. It requires an application before registration is approved.",
+      "link": "https://www.userinterviews.com/blog/ux-research-ops-conferences-events",
+      "status": "active"
+    },
+    "85b453f096c1bdc66f7e0241b2518525": {
+      "summary": "In-person conference focused on UX strategy and management, with speakers sharing how they tackle real challenges. Includes workshops and masterclasses.",
+      "start": "20261013",
+      "end": "20261015",
+      "location": "Graz, Austria",
+      "type": "UX Strategy & Management Conference",
+      "description": "Link: https://www.userinterviews.com/blog/ux-research-ops-conferences-events\nFormat: UX Strategy & Management Conference\nInhalt bzw. Relevanz: This in-person conference focuses on UX strategy and management, with speakers sharing how they tackle real challenges. It includes workshops and masterclasses to level up approaches.",
+      "link": "https://www.userinterviews.com/blog/ux-research-ops-conferences-events",
+      "status": "active"
+    },
+    "e849fad29300393106b064d87cb5369d": {
+      "summary": "Packs cutting-edge UX presentations into one well-organized day.",
+      "start": "20261106",
+      "end": "20261106",
+      "location": "Brighton, England",
+      "type": "UX Conference",
+      "description": "Link: https://www.userinterviews.com/blog/ux-research-ops-conferences-events\nFormat: UX Conference\nInhalt bzw. Relevanz: This event packs cutting-edge UX presentations into one well-organized day. The content aims to justify the investment for attendees.",
+      "link": "https://www.userinterviews.com/blog/ux-research-ops-conferences-events",
+      "status": "active"
+    },
+    "cd144776727eb529aefd68dd39550dbe": {
+      "summary": "A two-day gathering of design leaders from across the globe, covering ROI of design, culture of craft, design strategy, and career growth.",
+      "start": "20261111",
+      "end": "20261112",
+      "location": "London",
+      "type": "Design Leadership Gathering",
+      "description": "Link: https://www.userinterviews.com/blog/ux-research-ops-conferences-events\nFormat: Design Leadership Gathering\nInhalt bzw. Relevanz: A two-day gathering for design leaders covering topics like ROI of design and building a culture of craft. It also addresses design strategy and career growth.",
+      "link": "https://www.userinterviews.com/blog/ux-research-ops-conferences-events",
+      "status": "active"
+    },
+    "0dca9ee7302d34c796b6d520b3cce784": {
+      "summary": "UX Nordic 2026 - The International UX Conference",
+      "start": "20260415",
+      "end": "20260416",
+      "location": "VUE Cinema Bruuns, M. P. Bruuns Gade 25, 8000 Aarhus, Denmark",
+      "type": "Conference",
+      "description": "Link: https://www.uxnordic.com/\nFormat: Konferenz\nInhalt bzw. Relevanz: The high-quality, deep-dive conference for user experience design comes back to Aarhus. It offers top-notch speakers, cutting-edge topics, and hands-on workshops.",
+      "link": "https://www.uxnordic.com/",
+      "status": "active"
+    },
+    "6a4a01d8042e450b4448e47039210506": {
+      "summary": "UX Nordic 2026 Pre-Conference Networking Bar",
+      "start": "20260414",
+      "end": "20260414",
+      "location": "Gedulgt Bar, central Aarhus, Denmark",
+      "type": "Networking Event",
+      "description": "Link: https://www.uxnordic.com/\nFormat: Networking Event\nInhalt bzw. Relevanz: Join us for a casual and relaxed evening at the Gedulgt Bar in central Aarhus. This is the ideal setting to connect with fellow UX enthusiasts before the conference kicks off, allowing attendees to swap stories and build relationships.",
+      "link": "https://www.uxnordic.com/",
+      "status": "active"
+    },
+    "a766f8af896786d17b5cec8e1212028c": {
+      "summary": "III. European (Local) Public Innovation Conference",
+      "start": "20260526",
+      "end": "20260528",
+      "location": "Mirandela, Portugal",
+      "type": "Conference",
+      "description": "Link: https://innlocal.eu/3-european-local-public-innovation-conference/\nFormat: Conference\nInhalt bzw. Relevanz: This conference focuses on local public innovation, covering topics relevant to public administration, governance, and service improvement. It aims to foster collaboration within the Erasmus+ Cooperation Partnership INNlocal.",
+      "link": "https://innlocal.eu/3-european-local-public-innovation-conference/",
+      "status": "active"
     }
   }
 }
