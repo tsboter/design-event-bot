@@ -1,0 +1,104 @@
+{
+  "events": {
+    "eb77367627e46601d7884975b9fb1286": {
+      "summary": "SXSW (South by Southwest) 2026",
+      "start": "20260301",
+      "end": "20260301",
+      "is_confirmed": false,
+      "location": "Austin, USA",
+      "description": "Link: https://www.sxsw.com/\nFormat: Conference, Festival\nInhalt: Interactive, Tech, Film, Music, Design, UX, Innovation.",
+      "status": "on_hold",
+      "added_at": 1772719590.605713
+    },
+    "cd6a48ce08a1f680b60e5c2b6db34915": {
+      "summary": "Adobe MAX 2026",
+      "start": "20261001",
+      "end": "20261001",
+      "is_confirmed": false,
+      "location": "North America (city TBD)",
+      "description": "Link: https://max.adobe.com/\nFormat: Creative Conference, Workshops\nInhalt: Graphic Design, UI/UX, Photography, Video, Illustration, Web Design.",
+      "status": "on_hold",
+      "added_at": 1772719590.6057234
+    },
+    "18507c811e7a55b9d6d55418410a71d7": {
+      "summary": "Google I/O 2026",
+      "start": "20260501",
+      "end": "20260501",
+      "is_confirmed": false,
+      "location": "Mountain View, USA",
+      "description": "Link: https://events.google.com/io/\nFormat: Developer Conference, Keynotes\nInhalt: Android, Web, AI, Material Design, UX/UI, New Technologies.",
+      "status": "on_hold",
+      "added_at": 1772719590.6057274
+    },
+    "d0626e4327c4501428794bf3cf9921cc": {
+      "summary": "WWDC 2026 (Apple Worldwide Developers Conference)",
+      "start": "20260601",
+      "end": "20260601",
+      "is_confirmed": false,
+      "location": "Cupertino, USA (Online & Apple Park)",
+      "description": "Link: https://developer.apple.com/wwdc/\nFormat: Developer Conference, Sessions, Labs\nInhalt: iOS, macOS, watchOS, tvOS, visionOS, Human Interface Guidelines, UI/UX Design.",
+      "status": "on_hold",
+      "added_at": 1772719590.6057305
+    },
+    "99c07a5815807c54a217b2e9aba06ac1": {
+      "summary": "Interaction Week 2026 (IxDA)",
+      "start": "20260201",
+      "end": "20260201",
+      "is_confirmed": false,
+      "location": "Global (city TBD)",
+      "description": "Link: https://interaction.ixda.org/\nFormat: Conference, Workshops\nInhalt: Interaction Design, UX, Service Design, AI, Ethics, Design Research.",
+      "status": "on_hold",
+      "added_at": 1772719590.6057332
+    },
+    "54ec713247c17b69719585c6a973f15b": {
+      "summary": "Service Design Global Conference (SDGC) 2026",
+      "start": "20261001",
+      "end": "20261001",
+      "is_confirmed": false,
+      "location": "Global (city TBD)",
+      "description": "Link: https://www.service-design-network.org/events\nFormat: Conference, Workshops, Networking\nInhalt: Service Design, UX, CX, Business Innovation, Design Strategy.",
+      "status": "on_hold",
+      "added_at": 1772719590.6057358
+    },
+    "a05fc83d31396a7753c843af7aecfc64": {
+      "summary": "UXPA International Conference 2026",
+      "start": "20260601",
+      "end": "20260601",
+      "is_confirmed": false,
+      "location": "North America (city TBD)",
+      "description": "Link: https://uxpa.org/conferences/\nFormat: Conference, Workshops\nInhalt: User Experience, Usability, User Research, UI Design, Accessibility.",
+      "status": "on_hold",
+      "added_at": 1772719590.605738
+    },
+    "8751de685922cfa314642c7bbdeb81bf": {
+      "summary": "Milan Design Week 2026 (Salone del Mobile)",
+      "start": "20260401",
+      "end": "20260401",
+      "is_confirmed": false,
+      "location": "Milan, Italy",
+      "description": "Link: https://www.salonemilano.it/en/\nFormat: Festival, Exhibition\nInhalt: Product Design, Furniture, Interior Design, Industrial Design, Innovation.",
+      "status": "on_hold",
+      "added_at": 1772719590.6057403
+    },
+    "88925acd2867e07997ebc8cf966a7591": {
+      "summary": "London Design Festival 2026",
+      "start": "20260901",
+      "end": "20260901",
+      "is_confirmed": false,
+      "location": "London, UK",
+      "description": "Link: https://www.londondesignfestival.com/\nFormat: Festival, Exhibitions, Events\nInhalt: Product Design, Graphic Design, Architecture, Digital Design, Innovation.",
+      "status": "on_hold",
+      "added_at": 1772719590.605743
+    },
+    "90821bec2da0874bd1775aff45c4ec8b": {
+      "summary": "Web Summit 2026",
+      "start": "20261101",
+      "end": "20261101",
+      "is_confirmed": false,
+      "location": "Lisbon, Portugal",
+      "description": "Link: https://websummit.com/\nFormat: Technology Conference, Exhibitions\nInhalt: Tech, AI, Web Development, UI/UX Design, Startups, Venture Capital.",
+      "status": "on_hold",
+      "added_at": 1772719590.605745
+    }
+  }
+}
